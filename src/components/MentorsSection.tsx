@@ -6,11 +6,9 @@ export const MentorsSection = () => (
     <div className="container">
       <h2>Meet Your Mentors</h2>
       <p className="section-desc">
-        선후배가 한 공간에서 진짜 이야기를 나누는 시간. Swipe 하면서
-        멘토들을 만나보세요!
+        여러분을 도와줄 든든한 선배들을 소개합니다.
       </p>
       <MentorCarousel mentors={mentors} />
     </div>
   </section>
 );
-

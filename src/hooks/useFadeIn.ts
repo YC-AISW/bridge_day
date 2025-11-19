@@ -20,4 +20,3 @@ export const useFadeIn = () => {
     return () => observer.disconnect();
   }, []);
 };
-

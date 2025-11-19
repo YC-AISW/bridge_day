@@ -106,24 +106,14 @@ export const mentors: Mentor[] = [
           "https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=000000",
       },
       {
-        label: "React Native",
-        badge:
-          "https://img.shields.io/badge/React_Native-20232A?style=flat&logo=react&logoColor=61DAFB",
-      },
-      {
         label: "TailwindCSS",
         badge:
           "https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white",
       },
       {
-        label: "MUI",
+        label: "Next.js",
         badge:
-          "https://img.shields.io/badge/MUI-007FFF?style=flat&logo=mui&logoColor=ffffff",
-      },
-      {
-        label: "Node.js",
-        badge:
-          "https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=ffffff",
+          "https://img.shields.io/badge/Next.js-000000?style=flat&logo=nextdotjs&logoColor=ffffff",
       },
       {
         label: "TypeScript",
@@ -162,7 +152,7 @@ export const mentors: Mentor[] = [
   {
     grade: "3학년",
     name: "옥준서",
-    interest: "SAP · 엔터프라이즈",
+    interest: "SAP · 백엔드",
     stacks: [
       {
         label: "Java",
@@ -179,17 +169,12 @@ export const mentors: Mentor[] = [
         badge:
           "https://img.shields.io/badge/SAP%20Fiori-0FAAFF?style=flat&logo=sap&logoColor=ffffff",
       },
-      {
-        label: "SAP",
-        badge:
-          "https://img.shields.io/badge/SAP-0FAAFF?style=flat&logo=sap&logoColor=ffffff",
-      },
     ],
   },
   {
     grade: "3학년",
     name: "신경준",
-    interest: "데이터 엔지니어링",
+    interest: "서버 · 백엔드",
     stacks: [
       {
         label: "Java",
@@ -219,21 +204,31 @@ export const mentors: Mentor[] = [
           "https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=000000",
       },
       {
+        label: "TailwindCSS",
+        badge:
+          "https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white",
+      },
+      {
+        label: "MUI",
+        badge:
+          "https://img.shields.io/badge/MUI-007FFF?style=flat&logo=mui&logoColor=ffffff",
+      },
+      {
+        label: "Node.js",
+        badge:
+          "https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=ffffff",
+      },
+      {
         label: "TypeScript",
         badge:
           "https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=ffffff",
-      },
-      {
-        label: "Vite",
-        badge:
-          "https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=ffffff",
       },
     ],
   },
   {
     grade: "2학년",
     name: "김준성",
-    interest: "웹 서비스 엔지니어링",
+    interest: "풀 스택",
     stacks: [
       {
         label: "React",
@@ -270,7 +265,7 @@ export const mentors: Mentor[] = [
   {
     grade: "1학년",
     name: "이효준",
-    interest: "백엔드 · 데이터",
+    interest: "백엔드 · 데이터사이언스",
     stacks: [
       {
         label: "Spring Boot 3",
@@ -312,22 +307,27 @@ export const mentors: Mentor[] = [
   {
     grade: "1학년",
     name: "장영민",
-    interest: "게임 클라이언트",
+    interest: "웹 프론트엔드",
     stacks: [
       {
-        label: "Unity",
+        label: "React",
         badge:
-          "https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=ffffff",
+          "https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=000000",
       },
       {
-        label: "C#",
+        label: "TailwindCSS",
         badge:
-          "https://img.shields.io/badge/C%23-512BD4?style=flat&logo=csharp&logoColor=ffffff",
+          "https://img.shields.io/badge/TailwindCSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white",
       },
       {
-        label: "Photon",
+        label: "TypeScript",
         badge:
-          "https://img.shields.io/badge/Photon-5A29E4?style=flat&logo=photon&logoColor=ffffff",
+          "https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=ffffff",
+      },
+      {
+        label: "NestJS",
+        badge:
+          "https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=nestjs&logoColor=ffffff",
       },
     ],
   },

@@ -8,9 +8,7 @@ export const Hero = () => (
     <div className="container">
       <span className="badge">Special Invitation</span>
       <h1>2025 BRIDGE DAY</h1>
-      <p className="subtitle">
-        소프트웨어에 진심인 학생들을 위한 단 하루의 만남
-      </p>
+      <p className="subtitle">소프트웨어 인재를 위한 특별한 만남의 장</p>
       <div className="event-info">
         {eventInfo.map((info) => (
           <div className="info-item" key={info.label}>
@@ -28,4 +26,3 @@ export const Hero = () => (
     </div>
   </header>
 );
-
