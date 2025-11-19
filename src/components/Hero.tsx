@@ -1,10 +1,10 @@
 const eventInfo = [
-  { icon: "📅", label: "12월 6일 (금) 12:00" },
+  { icon: "📅", label: "12월 6일 (토) 12:00" },
   { icon: "📍", label: "AI-DX 센터 2층" },
 ];
 
 export const Hero = () => (
-  <header className="hero">
+  <header id="top" className="hero">
     <div className="container">
       <span className="badge">Special Invitation</span>
       <h1>2025 BRIDGE DAY</h1>

@@ -5,11 +5,10 @@ export const AboutSection = () => (
     <div className="container">
       <h2>About The Event</h2>
       <p className="description">
-        <strong>프로그래밍을 사랑하는 예비 후배</strong>들을 위해 준비한,
-        단 하나의 사전 멘토링 프로그램입니다.
+        <strong>소프트웨어에 관심이 많은 학생</strong>들을 선별하여 초청합니다.
         <br />
-        선배들이 직접 들려주는 학교 생활과 진로 이야기를 통해 더 현실적인
-        조언과 인사이트를 얻어가세요.
+        동기 및 선배들과의 만남을 통해 학교 생활과 진로에 대한 생생한 이야기를
+        나눠보세요
       </p>
       <div className="features">
         {features.map((feature) => (
@@ -22,4 +21,3 @@ export const AboutSection = () => (
     </div>
   </section>
 );
-
