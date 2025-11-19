@@ -274,49 +274,196 @@ section h2 {
 }
 
 /* Mentors Section */
-.mentor-groups {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+.mentor-slider {
+    position: relative;
+    margin: 30px auto 0;
+    width: 70%;
+    max-width: 920px;
 }
 
-.mentor-group {
+.mentor-track-wrapper {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.mentor-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+    touch-action: pan-y;
+}
+
+.mentor-card {
+    flex: 0 0 100%;
+    max-width: 100%;
     background: var(--card-bg);
-    padding: 30px;
     border-radius: 20px;
     border: 1px solid var(--card-border);
-    text-align: center;
-    backdrop-filter: blur(10px);
-}
-
-.mentor-group h3 {
-    color: var(--accent-color);
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
-    display: inline-block;
-}
-
-.names {
+    padding: 24px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    gap: 20px;
+    align-items: stretch;
+    box-shadow: var(--glass-shadow);
 }
 
-.name-tag {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px 16px;
-    border-radius: 50px;
+.mentor-card-left {
+    flex: 0 0 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mentor-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 18px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.mentor-grade {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    letter-spacing: 0.05em;
+}
+
+.mentor-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.mentor-card-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.mentor-meta {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 16px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.meta-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.meta-value {
     font-size: 1rem;
     color: #e2e8f0;
-    transition: background 0.3s;
 }
 
-.name-tag:hover {
-    background: rgba(56, 189, 248, 0.2);
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--card-border);
     color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    z-index: 2;
+}
+
+.slider-nav:hover {
+    background: rgba(56, 189, 248, 0.15);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.slider-nav:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: rgba(15, 23, 42, 0.5);
+    transform: translateY(-50%);
+}
+
+.slider-nav.prev {
+    left: -20px;
+}
+
+.slider-nav.next {
+    right: -20px;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(148, 163, 184, 0.3);
+    transition: transform 0.3s, background 0.3s;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.slider-dot.active {
+    background: var(--primary-color);
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}
+
+.mentor-track.grabbing {
+    cursor: grabbing;
+}
+
+.mentor-track.grabbing .mentor-card {
+    user-select: none;
+}
+
+@media (max-width: 900px) {
+    .mentor-slider {
+        width: 90%;
+    }
+
+    .slider-nav.prev {
+        left: -10px;
+    }
+
+    .slider-nav.next {
+        right: -10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mentor-slider {
+        width: 100%;
+    }
+
+    .mentor-card {
+        flex-direction: column;
+    }
+
+    .mentor-card-left {
+        flex: none;
+    }
+
+    .slider-nav {
+        display: none;
+    }
 }
 
 /* Footer */
