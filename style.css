@@ -457,21 +457,48 @@ section h2 {
 }
 
 @media (max-width: 768px) {
-  .mentor-slider {
-    width: 100%;
-  }
+    .mentor-slider {
+        width: 100%;
+    }
 
-  .mentor-card {
-    flex-direction: column;
-  }
+    .mentor-card {
+        flex-direction: column;
+    }
 
-  .mentor-card-left {
-    flex: none;
-  }
+    .mentor-card-left {
+        flex: none;
+    }
 
-  .slider-nav {
-    display: none;
-  }
+    .slider-nav {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    section {
+        padding: 70px 0;
+    }
+
+    .container {
+        padding: 0 28px;
+    }
+
+    #about .description {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    #about .feature-card {
+        padding: 20px;
+    }
+
+    .mentor-card {
+        padding: 22px;
+    }
+
+    .mentor-slider {
+        width: 92%;
+    }
 }
 
 /* Footer */
