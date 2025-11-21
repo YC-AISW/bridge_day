@@ -23,7 +23,7 @@ export const HomePage = () => {
     return () => observer.disconnect();
   }, []);
 
-  return (
+  return (  
     <>
       <div className="background-glow" />
       <MainNav visible={navVisible} />
