@@ -356,7 +356,7 @@ export const clubs: Club[] = [
   },
   {
     name: "OpenAI",
-    leader: "김경석",
+    leader: "최경석",
     advisor: "이승익 교수님",
     intro:
       "OpenAI 동아리는 오픈 소스를 활용해 AI 분야를 학습하고 AI 기반 애플리케이션 개발을 목표로 합니다.",
