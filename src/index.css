@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* ===== 공통 테마 변수 (컬러, 그림자 등) ===== */
 :root {
   --bg-color: #0f172a;
   --text-color: #e2e8f0;
@@ -14,16 +14,19 @@
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+/* 스크롤 시 부드럽게 섹션 이동 */
 html {
   scroll-behavior: smooth;
 }
 
+/* 기본 리셋 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* 페이지 기본 스타일 */
 body {
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, sans-serif;
@@ -33,7 +36,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Background Glow Effect */
+/* ===== 전체 배경 그라데이션 효과 (고정) ===== */
 .background-glow {
   position: fixed;
   top: 0;
@@ -54,12 +57,14 @@ body {
   pointer-events: none;
 }
 
+/* 중앙 레이아웃 컨테이너 */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+/* ===== 상단 고정 네비게이션 바 ===== */
 .main-nav {
   position: fixed;
   top: 0;
@@ -74,6 +79,7 @@ body {
   z-index: 15;
 }
 
+/* Hero 영역에서 벗어나면 나타나는 상태 */
 .main-nav.visible {
   transform: translateY(0);
   opacity: 1;
@@ -103,6 +109,7 @@ body {
   color: var(--primary-color);
 }
 
+/* 네비 링크 공통 */
 .nav-links {
   display: flex;
   gap: 18px;
@@ -115,6 +122,7 @@ body {
   flex-wrap: wrap;
 }
 
+/* 모바일 드롭다운 네비 */
 .nav-links.mobile {
   display: flex;
   flex-direction: column;
@@ -129,6 +137,7 @@ body {
   text-align: left;
 }
 
+/* 모바일 햄버거 버튼 */
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -147,18 +156,18 @@ body {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
+/* 햄버거 → X 아이콘 전환 */
 .nav-toggle.active span:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
-
 .nav-toggle.active span:nth-child(2) {
   opacity: 0;
 }
-
 .nav-toggle.active span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
 
+/* 네비 링크 스타일 */
 .nav-links a {
   color: #cbd5f5;
   font-size: 0.95rem;
@@ -174,7 +183,7 @@ body {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Hero Section */
+/* ===== Hero 영역 ===== */
 .hero {
   height: 100vh;
   display: flex;
@@ -186,6 +195,7 @@ body {
   padding-top: 60px;
 }
 
+/* 초대 배지 */
 .badge {
   display: inline-block;
   padding: 8px 16px;
@@ -200,6 +210,7 @@ body {
   animation: fadeInDown 1s ease-out;
 }
 
+/* 메인 타이틀 */
 .hero h1 {
   font-size: 3.5rem;
   font-weight: 800;
@@ -211,6 +222,7 @@ body {
   animation: fadeInUp 1s ease-out 0.2s backwards;
 }
 
+/* 서브 타이틀 */
 .hero .subtitle {
   font-size: 1.2rem;
   color: #94a3b8;
@@ -218,6 +230,7 @@ body {
   animation: fadeInUp 1s ease-out 0.4s backwards;
 }
 
+/* 날짜/장소 정보 배치 */
 .event-info {
   display: flex;
   gap: 30px;
@@ -244,6 +257,7 @@ body {
   font-size: 1.4rem;
 }
 
+/* 스크롤 안내 인디케이터 */
 .scroll-indicator {
   position: absolute;
   bottom: 40px;
@@ -268,7 +282,7 @@ body {
   transform: rotate(45deg);
 }
 
-/* Sections General */
+/* ===== 공통 섹션 스타일 ===== */
 section {
   padding: 100px 0;
 }
@@ -280,6 +294,7 @@ section h2 {
   color: #fff;
 }
 
+/* About Section 설명 텍스트 */
 .description {
   text-align: center;
   font-size: 1.2rem;
@@ -294,7 +309,7 @@ section h2 {
   margin-bottom: 50px;
 }
 
-/* About Section */
+/* ===== About Section 카드 그리드 ===== */
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -327,7 +342,7 @@ section h2 {
   color: #94a3b8;
 }
 
-/* Schedule Section */
+/* ===== Schedule Section: 타임라인 스타일 ===== */
 .timeline {
   max-width: 800px;
   margin: 0 auto;
@@ -350,6 +365,7 @@ section h2 {
   position: relative;
 }
 
+/* 타임라인 동그라미 */
 .timeline-item::before {
   content: "";
   position: absolute;
@@ -363,11 +379,13 @@ section h2 {
   z-index: 1;
 }
 
+/* 중요 구간 Highlight */
 .timeline-item.highlight::before {
   background: var(--secondary-color);
   box-shadow: 0 0 10px var(--secondary-color);
 }
 
+/* 시간 텍스트 영역 */
 .timeline-item .time {
   width: 160px;
   padding-top: 45px;
@@ -378,6 +396,7 @@ section h2 {
   flex-shrink: 0;
 }
 
+/* 내용 카드 */
 .timeline-item .content {
   flex: 1;
   background: var(--card-bg);
@@ -388,6 +407,7 @@ section h2 {
   margin-left: 30px;
 }
 
+/* 휴식/브레이크 타임 스타일 */
 .timeline-item.break .content {
   background: rgba(255, 255, 255, 0.03);
   padding: 25px 35px;
@@ -404,7 +424,7 @@ section h2 {
   font-size: 0.95rem;
 }
 
-/* Mentors Section */
+/* ===== Mentors Section: 캐러셀 & 클럽 카드 ===== */
 .mentor-slider {
   position: relative;
   margin: 30px auto 0;
@@ -444,15 +464,6 @@ section h2 {
   gap: 12px;
 }
 
-.mentor-avatar {
-  width: 140px;
-  height: 140px;
-  border-radius: 18px;
-  object-fit: cover;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
-}
-
 .mentor-grade {
   font-size: 0.95rem;
   font-weight: 600;
@@ -473,6 +484,7 @@ section h2 {
   gap: 18px;
 }
 
+/* 클럽 탭 & 카드 */
 .club-tabs {
   display: flex;
   gap: 12px;
@@ -517,21 +529,12 @@ section h2 {
   backdrop-filter: blur(14px);
 }
 
-.club-panel-card header {
-  margin-bottom: 18px;
-}
-
 .club-heading {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
   flex-wrap: wrap;
-}
-
-.club-panel-card h3 {
-  font-size: 1.6rem;
-  color: #fff;
 }
 
 .club-advisor {
@@ -542,29 +545,7 @@ section h2 {
   letter-spacing: 0.03em;
 }
 
-.club-leader {
-  font-size: 0.95rem;
-  color: #cbd5f5;
-}
-
-.club-info {
-  display: grid;
-  gap: 18px;
-}
-
-.club-info h4 {
-  font-size: 1rem;
-  color: var(--primary-color);
-  margin-bottom: 6px;
-  letter-spacing: 0.04em;
-}
-
-.club-info p {
-  color: #cbd5f5;
-  line-height: 1.7;
-  font-size: 0.95rem;
-}
-
+/* 멘토 메타 정보 카드 */
 .mentor-meta {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 16px;
@@ -586,20 +567,7 @@ section h2 {
   flex-shrink: 0;
 }
 
-.meta-label {
-  font-size: 0.8rem;
-  color: #94a3b8;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 6px;
-}
-
-.meta-value {
-  font-size: 1rem;
-  color: #e2e8f0;
-}
-
+/* 슬라이더 좌/우 버튼 & 점 인디케이터 */
 .slider-nav {
   position: absolute;
   top: 50%;
@@ -663,6 +631,7 @@ section h2 {
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
 }
 
+/* 드래그 중일 때 커서/선택 제어 */
 .mentor-track.grabbing {
   cursor: grabbing;
 }
@@ -671,6 +640,7 @@ section h2 {
   user-select: none;
 }
 
+/* ===== 반응형: 캐러셀, 네비, 섹션 패딩 ===== */
 @media (max-width: 900px) {
   .mentor-slider {
     width: 90%;
@@ -720,17 +690,6 @@ section h2 {
     display: none;
   }
 
-  .nav-links.mobile {
-    width: 100%;
-  }
-
-  .nav-links.mobile a {
-    width: 100%;
-    text-align: left;
-    font-size: 0.85rem;
-    padding: 6px 0;
-  }
-
   section {
     padding: 70px 0;
   }
@@ -744,10 +703,6 @@ section h2 {
     line-height: 1.5;
   }
 
-  #about .feature-card {
-    padding: 20px;
-  }
-
   .club-tabs {
     flex-direction: row;
     flex-wrap: nowrap;
@@ -757,27 +712,12 @@ section h2 {
     padding-bottom: 6px;
   }
 
-  .club-tabs button {
-    flex: 0 0 auto;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
-
-  .mentor-card {
-    padding: 22px;
-  }
-
-  .mentor-slider {
-    width: 92%;
-  }
-
   .club-panel {
     width: 100%;
   }
 }
 
-/* Footer */
+/* ===== Footer ===== */
 footer {
   padding: 60px 0;
   text-align: center;
@@ -797,13 +737,12 @@ footer .sub-footer {
   font-size: 0.9rem;
 }
 
-/* Animations */
+/* ===== 키프레임 애니메이션 ===== */
 @keyframes fadeInDown {
   from {
     opacity: 0;
     transform: translateY(-20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -815,7 +754,6 @@ footer .sub-footer {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -830,17 +768,15 @@ footer .sub-footer {
   100% {
     transform: translateY(0);
   }
-
   40% {
     transform: translateY(-10px);
   }
-
   60% {
     transform: translateY(-5px);
   }
 }
 
-/* Scroll Animation Classes */
+/* ===== 스크롤 페이드인 공통 클래스 ===== */
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -852,47 +788,7 @@ footer .sub-footer {
   transform: translateY(0);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .timeline::before {
-    left: 20px;
-  }
-
-  .timeline-item::before {
-    left: 14px;
-  }
-
-  .timeline-item .time {
-    width: auto;
-    position: absolute;
-    top: -25px;
-    left: 40px;
-    text-align: left;
-    padding: 0;
-  }
-
-  .timeline-item {
-    flex-direction: column;
-    padding-left: 40px;
-    margin-top: 40px;
-  }
-
-  .timeline-item .content {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Responsive */
+/* ===== Timeline 반응형 (모바일 레이아웃) ===== */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.5rem;

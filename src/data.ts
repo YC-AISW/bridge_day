@@ -1,33 +1,12 @@
+// ===== BRIDGE DAY 메인 페이지에서 사용하는 데이터 모음 =====
+
+// 페이지 상단의 About 섹션에서
+// BRIDGE DAY 행사를 한눈에 소개하기 위한 특징 데이터입니다.
+// - title: 특징 이름
+// - description: 특징에 대한 간단한 설명
 export type Feature = {
   title: string;
   description: string;
-};
-
-export type TimelineItem = {
-  time: string;
-  title: string;
-  description: string;
-  type?: "break" | "highlight";
-};
-
-export type MentorStack = {
-  label: string;
-  badge: string;
-};
-
-export type Mentor = {
-  grade: string;
-  name: string;
-  interest: string;
-  stacks: MentorStack[];
-};
-
-export type Club = {
-  name: string;
-  leader: string;
-  advisor: string;
-  intro: string;
-  activity: string;
 };
 
 export const features: Feature[] = [
@@ -44,6 +23,21 @@ export const features: Feature[] = [
     description: "우수 선배들의 포트폴리오 발표와 현실적인 조언",
   },
 ];
+
+// ===== 행사 일정(Time Table) 데이터 =====
+// Time Table 섹션에서 사용하는 일정 데이터입니다.
+// - time: 행사 시간 (예: "12:00 ~ 13:00")
+// - title: 일정 제목 (예: "출석체크 및 점심식사")
+// - description: 해당 시간에 진행되는 내용 설명
+// - type: (선택) 일정 강조를 위한 타입으로, "break" 또는 "highlight" 를 가질 수 있습니다.
+//          "break"   → 휴식/브레이크 구간 강조
+//          "highlight" → 주요 세션 강조
+export type TimelineItem = {
+  time: string;
+  title: string;
+  description: string;
+  type?: "break" | "highlight";
+};
 
 export const timeline: TimelineItem[] = [
   {
@@ -102,10 +96,40 @@ export const timeline: TimelineItem[] = [
   },
 ];
 
+// ===== 멘토 스택 배지 데이터 =====
+// 멘토들이 사용할 수 있는 기술 스택을 뱃지 형태로 출력하기 위한 데이터입니다.
+// 배지 이미지는 shields.io 에서 URL 형태로 가져옵니다.
+// 예시:
+//   https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=000000
+// 주요 파라미터:
+//   - 첫 번째 텍스트 (React): 표시할 텍스트
+//   - 뒤의 색상 값 (61DAFB): 오른쪽 배경 색상
+//   - style=flat          : 뱃지 스타일 (자세한 옵션은 https://shields.io/badges 참고)
+//   - logo=react          : 로고 아이콘 종류
+//   - logoColor=000000    : 로고 아이콘 색상
+export type MentorStack = {
+  label: string; // 뱃지에 해당하는 기술 이름
+  badge: string; // shields.io 뱃지 URL
+};
+
+// MentorStack 생성을 간단하게 하기 위한 헬퍼 함수
 const badge = (label: string, url: string): MentorStack => ({
   label,
   badge: url,
 });
+
+// ===== 멘토 소개 데이터 =====
+// MentorCarousel / MentorsSection 에서 사용하는 멘토 정보입니다.
+// - grade   : 현재 학년 (예: "4학년")
+// - name    : 이름
+// - interest: 관심 분야 (예: "웹 프론트엔드")
+// - stacks  : 사용 가능한 기술 스택 목록 (MentorStack[])
+export type Mentor = {
+  grade: string;
+  name: string;
+  interest: string;
+  stacks: MentorStack[];
+};
 
 export const mentors: Mentor[] = [
   {
@@ -325,6 +349,21 @@ export const mentors: Mentor[] = [
     ],
   },
 ];
+
+// ===== 동아리 소개 데이터 =====
+// 동아리 소개 섹션에서 사용하는 전공 동아리 정보입니다.
+// - name     : 동아리 이름
+// - leader   : 동아리장 이름
+// - advisor  : 지도 교수님 성함
+// - intro    : 동아리에 대한 간단한 소개
+// - activity : 동아리에서 주로 진행하는 활동 소개
+export type Club = {
+  name: string;
+  leader: string;
+  advisor: string;
+  intro: string;
+  activity: string;
+};
 
 export const clubs: Club[] = [
   {
