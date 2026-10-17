@@ -8,7 +8,33 @@
 
 ## 🔗 배포 URL
 
-> 📎 **참가자 안내용 URL:** https://bridge-day.onrender.com/
+> 📎 **참가자 안내용 URL:** https://ycsmartsw.github.io/bridge_day/
+
+GitHub Pages에서 제공하는 프론트엔드 전용 사이트입니다. 별도 백엔드 서버는 필요하지 않습니다.
+
+### 자동 배포
+
+- `main` 브랜치에 푸시하면 GitHub Actions가 의존성 설치, 빌드, GitHub Pages 배포를 실행합니다.
+- 워크플로: [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)
+- 배포 상태: [GitHub Actions](https://github.com/YCsmartsw/bridge_day/actions/workflows/deploy.yml)
+- 수동 재배포: Actions → Deploy to GitHub Pages → Run workflow → `main`
+- 저장소 설정: Settings → Pages → Build and deployment → Source: **GitHub Actions**
+
+`vite.config.ts`의 `base`는 GitHub Pages 경로에 맞춰 `/bridge_day/`로 설정되어 있습니다.
+
+### 로컬 실행 및 빌드
+
+```bash
+npm ci
+npm run dev
+```
+
+```bash
+npm run build
+npm run preview
+```
+
+빌드 결과는 `dist/`에 생성됩니다. 미리보기에서는 `/bridge_day/` 경로로 접속합니다.
 
 ---
 
