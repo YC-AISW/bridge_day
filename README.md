@@ -8,7 +8,7 @@
 
 ## 🔗 배포 URL
 
-> 📎 **참가자 안내용 URL:** https://ycsmartsw.github.io/bridge_day/
+> 📎 **참가자 안내용 URL:** https://yc-aisw.github.io/bridge_day/
 
 GitHub Pages에서 제공하는 프론트엔드 전용 사이트입니다. 별도 백엔드 서버는 필요하지 않습니다.
 
@@ -16,7 +16,7 @@ GitHub Pages에서 제공하는 프론트엔드 전용 사이트입니다. 별�
 
 - `main` 브랜치에 푸시하면 GitHub Actions가 의존성 설치, 빌드, GitHub Pages 배포를 실행합니다.
 - 워크플로: [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml)
-- 배포 상태: [GitHub Actions](https://github.com/YCsmartsw/bridge_day/actions/workflows/deploy.yml)
+- 배포 상태: [GitHub Actions](https://github.com/YC-AISW/bridge_day/actions/workflows/deploy.yml)
 - 수동 재배포: Actions → Deploy to GitHub Pages → Run workflow → `main`
 - 저장소 설정: Settings → Pages → Build and deployment → Source: **GitHub Actions**
 
