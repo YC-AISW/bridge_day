@@ -1,0 +1,70 @@
+/* ===== 흐르는 띠 ===== */
+.ticker {
+  position: relative;
+  display: grid;
+  padding-block: clamp(36px, 6vw, 64px);
+  overflow: hidden;
+}
+
+.ticker__tape {
+  grid-area: 1 / 1;
+  display: flex;
+  width: 120%;
+  margin-left: -10%;
+  padding-block: 14px;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.6vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.ticker__tape--fill {
+  color: #04111f;
+  background: var(--grad);
+  transform: rotate(-2.5deg);
+  box-shadow: 0 20px 60px -20px rgba(47, 214, 242, 0.55);
+}
+
+/* 가변 글꼴은 외곽선(text-stroke)을 쓰면 글자 안쪽 겹친 선이 보여서, 반투명 글자로 표현해요. */
+.ticker__tape--outline {
+  color: rgba(238, 242, 255, 0.3);
+  background: rgba(10, 16, 34, 0.9);
+  border-block: 1px solid var(--line-2);
+  transform: rotate(2.5deg);
+}
+
+.ticker__tape--outline svg {
+  color: var(--violet);
+}
+
+.ticker__group {
+  display: flex;
+  flex-shrink: 0;
+  animation: ticker-flow 32s linear infinite;
+}
+
+.ticker__tape--outline .ticker__group {
+  animation-direction: reverse;
+  animation-duration: 38s;
+}
+
+.ticker__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(18px, 2.6vw, 32px);
+  padding-right: clamp(18px, 2.6vw, 32px);
+}
+
+.ticker__item svg {
+  width: 0.8em;
+  height: 0.8em;
+  flex-shrink: 0;
+}
+
+@keyframes ticker-flow {
+  to {
+    transform: translateX(-100%);
+  }
+}

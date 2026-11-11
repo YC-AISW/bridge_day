@@ -1,8 +1,12 @@
-# 🌉 2025 BRIDGE DAY – 행사 안내 웹사이트
+# 🌉 2026 BRIDGE DAY – 행사 안내 웹사이트
 
 > **소프트웨어 인재를 위한 특별한 만남의 장**  
-> 스마트소프트웨어학과 2025 BRIDGE DAY 초청 행사를 소개하는 랜딩 페이지입니다.  
+> 스마트소프트웨어학과 BRIDGE DAY 초청 행사를 소개하는 랜딩 페이지입니다.  
 > **참가 대상 학생들에게 공유할 공식 안내 URL**에 해당합니다.
+
+<p align="center">
+  <img src="./docs/screenshots/desktop-hero.jpg" width="760" alt="2026 BRIDGE DAY 첫 화면" />
+</p>
 
 ---
 
@@ -38,75 +42,86 @@ npm run preview
 
 ---
 
-## 📅 행사 개요
+## 📅 행사 개요 (2026)
 
-- **행사명:** 2025 BRIDGE DAY  
-- **일시:** 12월 6일 (토) 12:00  
-- **장소:** AI-DX 센터 1층  
-- **대상:** 소프트웨어에 관심이 많은 초청 학생  
-- **주요 내용:** 네트워킹 · 점심 · 멘토링 · 동아리 소개
-
----
-
-## 화면 구성 (UI Screens)  
-
-
-## 🎉 Special Invitation  
-
-> **소프트웨어 인재를 위한 특별한 만남의 장**
-
-<p align="center">
-  <img src="./Bridge_day/HeroSection.png" width="700" alt="메인 페이지" />
-  <img src="./Bridge_day/Main_mobile.png" width="400" alt="메인 페이지" />
-</p>
+- **행사명:** 2026 BRIDGE DAY
+- **일시:** 날짜 추후 공지 · 12:00 – 16:00
+- **장소:** AI·DX 센터 1층 (정문에서 도보 약 7분)
+- **대상:** 소프트웨어에 관심이 많은 초청 학생
+- **주요 내용:** 네트워킹 · 점심 · 선배 포트폴리오 발표 · AI·DX 센터와 선배 프로젝트 체험 · 전공 동아리 소개
 
 ---
 
-## 📘 About The Event
+## ✏️ 내용 수정하기
 
-<p align="center">
-  <img src="./Bridge_day/AboutSection.png" width="700" alt="About_Section" />
-  <p align="center">
-    <img src="./Bridge_day/About_mobile.png" width="400" alt="About_Section" />
-    <img src="./Bridge_day/HeaderNav_mobile.png" width="345" alt="About_Section" />
-  </p>
-</p>
+문구와 일정은 모두 [`src/data.ts`](./src/data.ts) 한 파일에 있습니다. 화면 코드는 고치지 않아도 됩니다.
 
----
-
-## 🕒 Time Table
-
-<p align="center">
-  <img src="./Bridge_day/AboutSection.png" width="700" alt="About_Section" />
-  <img src="./Bridge_day/About_mobile.png" width="400" alt="About_Section" />
-</p>
+| 바꿀 내용 | 위치 |
+| --- | --- |
+| 날짜 · 시간 · 장소 · 문의 전화 | `event` — 날짜를 `"2026-12-05"`처럼 넣으면 요일과 D-day가 자동으로 붙습니다. |
+| 행사 특징 카드 | `features` |
+| 타임테이블 | `timeline` — 진행 시간(분)은 시작·끝 시각으로 자동 계산됩니다. |
+| 멘토 | `mentors` — 기술 스택 색은 `src/components/Mentors.tsx`의 `STACK_COLORS` |
+| 전공 동아리 | `clubs` — [학과 홈페이지 전공동아리](https://www.yc.ac.kr/smartsw/major-clubs.do) 기준 |
+| 길 안내 문구 · 사진 | `routeSteps` |
+| 버스 · 택시 안내 | `transit` — [학교위치/교통](https://www.yc.ac.kr/www/campus-info.do) 기준 |
 
 ---
 
-## 👨‍🏫 Meet Your Mentors
+## 🗺️ 찾아오는 길 지도
 
-<p align="center">
-  <img src="./Bridge_day/MentorsSection.png" width="700" alt="About_Section" />
-  <img src="./Bridge_day/Mentor_mobile.png" width="400" alt="About_Section" />
-</p>
+- 정문 → AI·DX 센터 지도는 OT 앱(Frontend 저장소)의 캠퍼스 지도 데이터에서 길 안내에 필요한 부분만 잘라 만든 SVG입니다. 주차장·나무·산책로 같은 정보는 빼고 건물·도로·잔디만 남겼습니다.
+- 정문 위치와 경로는 위성사진·정문 사진과 맞춰 확인했고, 경사는 지형 고도 데이터로 확인했습니다. 정문에서 연암미래관 앞 갈림길까지가 오르막입니다.
+- 지도는 **위쪽이 정문에서 학교 안쪽을 바라본 방향(서쪽)** 입니다. 정문에 서서 휴대폰을 들면 화면과 실제 방향이 같습니다.
+- 지도 데이터를 다시 만들려면 Frontend 저장소를 이 저장소 옆 폴더에 두고 아래 명령을 실행합니다. 결과는 `src/campusMap.ts`에 저장됩니다.
 
----
+  ```bash
+  npm run map:extract
+  ```
 
-## 🏫 동아리 소개
-
-<p align="center">
-  <img src="./Bridge_day/ClubSection.png" width="700" alt="About_Section" />
-  <img src="./Bridge_day/Club_mobile.png" width="400" alt="About_Section" />
-</p>
+- 출처: 건물 윤곽 국토교통부 도로명주소 건물(VWorld), 도로·잔디·운동장 © OpenStreetMap contributors (ODbL), 캠퍼스 사진 연암공과대학교 캠퍼스 안내
 
 ---
 
-## 🛠 기술 스택 (웹 구현)
-- React  
-- Vite  
-- TypeScript  
-- Tailwind CSS  
-- Framer Motion 등
+## 🖥 화면 구성
+
+| 첫 화면 (모바일) | 일정 (모바일) | 찾아오는 길 (모바일) |
+| :---: | :---: | :---: |
+| <img src="./docs/screenshots/mobile-hero.jpg" width="240" alt="모바일 첫 화면" /> | <img src="./docs/screenshots/mobile-schedule.jpg" width="240" alt="모바일 타임테이블" /> | <img src="./docs/screenshots/mobile-directions.jpg" width="240" alt="모바일 찾아오는 길 지도" /> |
+
+### About The Event
+
+<p align="center"><img src="./docs/screenshots/desktop-about.jpg" width="760" alt="행사 소개" /></p>
+
+### Time Table
+
+<p align="center"><img src="./docs/screenshots/desktop-schedule.jpg" width="760" alt="타임테이블" /></p>
+
+### Meet Your Mentors
+
+<p align="center"><img src="./docs/screenshots/desktop-mentors.jpg" width="760" alt="멘토 소개" /></p>
+
+### 전공 동아리
+
+<p align="center"><img src="./docs/screenshots/desktop-clubs.jpg" width="760" alt="동아리 소개" /></p>
+
+### 찾아오는 길
+
+<p align="center"><img src="./docs/screenshots/desktop-directions.jpg" width="760" alt="정문에서 AI·DX 센터까지 길 안내" /></p>
 
 ---
 
+## 🛠 기술 스택
+
+- React 18 · TypeScript · Vite 5
+- 순수 CSS (CSS 프레임워크 · 애니메이션 라이브러리 없음)
+- 글꼴: Pretendard(본문), Unbounded(영문 제목) — npm 패키지로 함께 배포
+
+### 사용한 퍼블리싱 기법
+
+- **첫 화면:** SVG 현수교 라인 드로잉(`stroke-dashoffset`), 글자별 등장 애니메이션, 오로라 그라디언트, 별빛, 물에 비친 다리
+- **스크롤 연출:** 스크롤 진행 막대, 현재 섹션을 따라 움직이는 메뉴 표시, 스크롤에 따라 채워지는 타임라인, 섹션 등장 효과
+- **카드:** 마우스를 따라오는 스포트라이트(CSS 변수 + mask), `@property`로 회전하는 그라디언트 테두리, 멘토 카드 3D 기울이기 + 홀로그램 반사
+- **찾아오는 길:** 스크롤텔링(지도 고정 + 단계 강조), SVG 경로 진행 애니메이션, "길 따라가기" 재생
+- **기타:** 숫자 굴리기 카운터, 무한 흐르는 띠, 카카오톡 링크 미리보기(OG) 이미지
+- **접근성:** 본문 바로가기, 키보드 포커스 표시, 지도 대체 텍스트, `prefers-reduced-motion`(동작 줄이기) 대응

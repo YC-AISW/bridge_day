@@ -1,0 +1,424 @@
+/* ===== 찾아오는 길 ===== */
+.directions__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: calc(clamp(48px, 7vw, 80px) * -0.55) 0 clamp(28px, 4vw, 40px);
+}
+
+.directions__summary .chip {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.directions__summary svg {
+  color: var(--cyan);
+}
+
+.directions__layout {
+  display: grid;
+  gap: 28px;
+}
+
+/* --- 지도 카드 --- */
+.map-card {
+  position: relative;
+  padding: 12px;
+  border-radius: 28px;
+  scroll-margin-top: 16px;
+  background: #0a1022;
+  border: 1px solid var(--line-2);
+  box-shadow:
+    0 40px 80px -40px rgba(0, 0, 0, 0.85),
+    0 0 0 6px rgba(255, 255, 255, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.map-card__caption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 6px 8px 10px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.map-card__num {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  color: #04111f;
+  background: var(--grad);
+}
+
+.map-card .campus-map {
+  border-radius: 18px;
+  background: #0b1226;
+}
+
+.map-card__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 4px 2px;
+}
+
+.map-card__controls .btn--primary svg {
+  transform: none !important;
+}
+
+.map-card__pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.map-card__pager button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  transition:
+    background 0.2s,
+    opacity 0.2s,
+    transform 0.3s var(--ease-spring);
+}
+
+.map-card__pager button:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.06);
+}
+
+.map-card__pager button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.map-card__note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px 4px;
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+
+.map-card__note svg {
+  flex-shrink: 0;
+  color: var(--amber);
+}
+
+.map-card__credit {
+  margin-top: 10px;
+  font-size: 11px;
+  text-align: center;
+  color: var(--text-3);
+}
+
+/* --- 단계 카드 --- */
+.route-steps {
+  display: grid;
+  gap: 14px;
+}
+
+.route-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr 200px;
+  gap: 16px;
+  align-items: start;
+  padding: 18px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition:
+    background 0.35s,
+    border-color 0.35s,
+    box-shadow 0.35s,
+    opacity 0.35s;
+}
+
+.route-step:hover {
+  border-color: var(--line-2);
+}
+
+.route-step[data-state="active"] {
+  background: linear-gradient(135deg, rgba(91, 140, 255, 0.16), rgba(47, 214, 242, 0.05));
+  border-color: rgba(47, 214, 242, 0.5);
+  box-shadow: 0 24px 60px -32px rgba(47, 214, 242, 0.7);
+}
+
+.route-step__num {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  transition:
+    background 0.35s,
+    color 0.35s,
+    box-shadow 0.35s,
+    transform 0.45s var(--ease-spring);
+}
+
+.route-step[data-state="past"] .route-step__num {
+  color: var(--cyan);
+  border-color: rgba(47, 214, 242, 0.45);
+}
+
+.route-step[data-state="active"] .route-step__num {
+  color: #04111f;
+  background: var(--grad);
+  border-color: transparent;
+  box-shadow: 0 0 0 6px rgba(47, 214, 242, 0.15);
+  transform: scale(1.08);
+}
+
+.route-step__leg {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.route-step__title {
+  margin-top: 2px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.route-step__text {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--text-2);
+}
+
+.route-step__photo,
+.route-step__goal {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 14px;
+  border: 1px solid var(--line-2);
+}
+
+.route-step__photo {
+  object-fit: cover;
+  background: var(--surface-2);
+}
+
+.route-step__goal {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+  border-color: transparent;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.28), transparent 45%),
+    linear-gradient(135deg, #7a5cff, #5b8cff 55%, #2fd6f2);
+  box-shadow: 0 18px 40px -18px rgba(122, 92, 255, 0.9);
+}
+
+.route-step--arrive .route-step__title {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 넓은 화면: 지도 고정 + 스크롤 따라 단계 강조 */
+@media (min-width: 960px) {
+  .directions__layout {
+    grid-template-columns: minmax(380px, 0.95fr) 1.05fr;
+    gap: 44px;
+    align-items: start;
+  }
+
+  .directions__map-col {
+    position: sticky;
+    top: 92px;
+  }
+
+  .directions__map-col .campus-map {
+    max-height: calc(100vh - 300px);
+  }
+
+  .route-steps {
+    gap: 18px;
+    padding-bottom: 22vh;
+  }
+
+  .route-step:not([data-state="active"]) {
+    opacity: 0.6;
+  }
+
+  .route-step:not([data-state="active"]):hover {
+    opacity: 0.9;
+  }
+}
+
+/* 좁은 화면: 사진은 글 아래로 */
+@media (max-width: 639px) {
+  .route-step {
+    grid-template-columns: 36px 1fr;
+    gap: 12px 14px;
+    padding: 16px;
+  }
+
+  .route-step__num {
+    width: 36px;
+    height: 36px;
+  }
+
+  .route-step__photo,
+  .route-step__goal {
+    grid-column: 2;
+  }
+
+  .route-step__title {
+    font-size: 18px;
+  }
+}
+
+/* --- 학교까지 오는 법 --- */
+.getting-here {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 28px 44px;
+  margin-top: clamp(48px, 7vw, 80px);
+  padding: clamp(24px, 4vw, 40px);
+  border-radius: 28px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012));
+  border: 1px solid var(--line);
+}
+
+.getting-here__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.getting-here__address {
+  margin-top: 12px;
+  font-size: clamp(20px, 2.4vw, 24px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+.getting-here__address span {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.getting-here__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.getting-here__kakao {
+  color: #191919;
+  background: #fee500;
+  border-color: transparent;
+}
+
+.getting-here__naver {
+  color: #fff;
+  background: #03c75a;
+  border-color: transparent;
+}
+
+.getting-here__kakao:hover,
+.getting-here__naver:hover {
+  border-color: transparent;
+  filter: brightness(1.05);
+}
+
+.getting-here__hint {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+
+.getting-here__transit {
+  display: grid;
+  gap: 12px;
+}
+
+.getting-here__transit li {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+}
+
+.getting-here__from {
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.getting-here__way {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.getting-here__way svg {
+  margin-top: 2px;
+  color: var(--cyan);
+}
+
+.getting-here__source {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.getting-here__source a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 859px) {
+  .getting-here {
+    grid-template-columns: 1fr;
+  }
+}
