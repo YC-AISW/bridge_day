@@ -58,17 +58,18 @@ npm run preview
 
 | 바꿀 내용 | 위치 |
 | --- | --- |
-| 날짜 · 시간 · 장소 · 문의 전화 | `event` — 날짜를 `"2026-12-05"`처럼 넣으면 요일과 D-day가 자동으로 붙습니다. |
+| 연도 · 날짜 · 장소 | `event` — 날짜를 `"2026-12-05"`처럼 넣으면 "12월 5일 (토) 12:00"처럼 요일이 자동으로 붙습니다. |
 | 행사 특징 카드 | `features` |
-| 타임테이블 | `timeline` — 진행 시간(분)은 시작·끝 시각으로 자동 계산됩니다. |
-| 멘토 | `mentors` — 비워 둔 항목은 "소개 준비 중"으로 표시됩니다. |
-| 전공 동아리 | `clubs` — [학과 홈페이지 전공동아리](https://www.yc.ac.kr/smartsw/major-clubs.do) 기준 |
+| 타임테이블 | `timeline` — 시간(`time`), 제목(진행 시간 포함), 설명, 강조(`type`) |
+| 멘토 | `mentors` — 기술 스택은 shields.io 배지 URL. 비워 둔 관심 분야는 "소개 준비 중"으로 표시됩니다. |
+| 전공 동아리 | `clubs` — [학과 홈페이지 전공동아리](https://www.yc.ac.kr/smartsw/major-clubs.do) 기준. 동아리장을 비워 두면 표시하지 않습니다. |
+| 문의 전화 | `src/components/Footer.tsx` |
 
 ---
 
 ## 🗺️ 오시는 길 지도
 
-- 정문에서 이어지는 길과 목적지(AI·DX 센터, 학교 빨강)만 표시한 지도 한 장입니다. 단계 번호나 애니메이션은 없습니다.
+- 정문에서 이어지는 길과 목적지(AI·DX 센터)만 표시한 지도 한 장입니다.
 - OT 앱(Frontend 저장소)의 캠퍼스 지도 데이터에서 필요한 부분만 잘라 만든 SVG입니다. 주차장·나무·산책로 같은 정보는 빼고 건물·도로·잔디만 남겼습니다.
 - 정문 위치와 경로는 위성사진·정문 사진과 맞춰 확인했고, 경사는 지형 고도 데이터로 확인했습니다. 정문에서 연암미래관 앞 갈림길까지가 오르막입니다.
 - 지도는 **위쪽이 정문에서 학교 안쪽을 바라본 방향(서쪽)** 입니다. 정문에 서서 휴대폰을 들면 화면과 실제 방향이 같습니다.
@@ -88,38 +89,35 @@ npm run preview
 | :---: | :---: | :---: |
 | <img src="./docs/screenshots/mobile-hero.jpg" width="240" alt="모바일 첫 화면" /> | <img src="./docs/screenshots/mobile-schedule.jpg" width="240" alt="모바일 타임테이블" /> | <img src="./docs/screenshots/mobile-directions.jpg" width="240" alt="모바일 오시는 길 지도" /> |
 
-### 행사 소개
+### 📘 About The Event
 
-<p align="center"><img src="./docs/screenshots/desktop-about.jpg" width="760" alt="행사 소개" /></p>
+<p align="center"><img src="./docs/screenshots/desktop-about.jpg" width="760" alt="About The Event" /></p>
 
-### 일정
+### 🕒 Time Table
 
-<p align="center"><img src="./docs/screenshots/desktop-schedule.jpg" width="760" alt="타임테이블" /></p>
+<p align="center"><img src="./docs/screenshots/desktop-schedule.jpg" width="760" alt="Time Table" /></p>
 
-### 멘토 소개
+### 👨‍🏫 Meet Your Mentors
 
-<p align="center"><img src="./docs/screenshots/desktop-mentors.jpg" width="760" alt="멘토 소개" /></p>
+<p align="center"><img src="./docs/screenshots/desktop-mentors.jpg" width="760" alt="Meet Your Mentors" /></p>
 
-### 전공 동아리
+### 🏫 동아리 소개
 
 <p align="center"><img src="./docs/screenshots/desktop-clubs.jpg" width="760" alt="동아리 소개" /></p>
 
-### 오시는 길
+### 🗺️ 오시는 길
 
 <p align="center"><img src="./docs/screenshots/desktop-directions.jpg" width="760" alt="정문에서 AI·DX 센터까지 지도" /></p>
 
 ---
 
-## 🛠 기술 스택
+## 🛠 기술 스택 (웹 구현)
 
-- React 18 · TypeScript · Vite 5
-- 순수 CSS (CSS 프레임워크 · 애니메이션 라이브러리 없음)
-- 글꼴: Pretendard(본문), Unbounded(`BRIDGE DAY` 제목) — npm 패키지로 함께 배포
+- React
+- Vite
+- TypeScript
+- Tailwind CSS (기본 스타일 초기화)
+- Framer Motion
+- 글꼴: Pretendard (npm 패키지로 함께 배포)
 
-### 디자인 원칙
-
-- **연암공과대학교에서 보내는 초대장:** 첫 화면은 학교 심벌과 학교 이름이 찍힌 초대장 카드입니다. 색은 심벌의 세 색(파랑 `#559cb5` · 빨강 `#d81247` · 회색 `#6d6e71`)을 씁니다. 심벌(`src/assets/brand/yonam-symbol.png`)은 학교 규정대로 비율과 색을 바꾸지 않습니다.
-- **정보 전달이 먼저:** 일시 · 장소는 초대장 안에 표로, 동아리는 "소개 · 주요 활동 · 지도교수" 표로 보여 줍니다.
-- **일정은 2025년과 같은 타임라인:** 2025년 BRIDGE DAY의 타임라인 모양과 색을 그대로 썼습니다.
-- **휴대폰 성능:** 계속 도는 애니메이션 · 블러 · 블렌드 효과를 쓰지 않습니다.
-- **접근성:** 본문 바로가기, 키보드 포커스 표시, 지도 대체 텍스트, `prefers-reduced-motion`(동작 줄이기) 대응
+디자인은 2025 BRIDGE DAY 때 만든 화면을 그대로 쓰고, 2026년 내용과 오시는 길 지도만 더했습니다.

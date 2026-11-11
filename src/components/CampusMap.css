@@ -3,7 +3,7 @@
   display: block;
   width: 100%;
   height: auto;
-  font-family: var(--font);
+  font-family: inherit;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -49,7 +49,7 @@
 
 /* 목적지 건물: 학교 빨강 */
 .map-building--destination {
-  fill: var(--school-red);
+  fill: #d81247;
   stroke: #fff;
   stroke-width: 1.6;
 }
@@ -63,7 +63,7 @@
 }
 
 .map-route-glow {
-  stroke: var(--school-blue);
+  stroke: #559cb5;
   stroke-width: 13;
   opacity: 0.25;
 }
@@ -75,7 +75,7 @@
 
 .map-start {
   fill: #fff;
-  stroke: var(--school-blue);
+  stroke: #559cb5;
   stroke-width: 2.5;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .map-dest__pin {
-  fill: var(--school-red);
+  fill: #d81247;
 }
 
 .map-dest text {
@@ -136,7 +136,7 @@
 
 .map-compass path {
   fill: none;
-  stroke: var(--amber);
+  stroke: #ffcf5c;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;

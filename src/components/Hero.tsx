@@ -1,70 +1,43 @@
 import { event } from "../data";
-import { ddayLabel, formatDate } from "../lib/format";
-import { BridgeArt } from "./BridgeArt";
-import { Icon } from "./Icon";
-import { SchoolMark } from "./SchoolMark";
-import "./Hero.css";
+import { formatDate } from "../lib/format";
 
-/** 첫 화면: 연암공과대학교에서 보내는 초대장 */
-export const Hero = () => {
-  const date = formatDate(event.date);
-  const dday = ddayLabel(event.date);
+// 행사 기본 정보를 렌더링할 데이터 배열 (아이콘 + 텍스트)
+// 날짜와 장소는 data.ts 의 event 에서 가져와요.
+const date = formatDate(event.date);
+const eventInfo = [
+  { icon: "📅", label: date ? `${date} ${event.startTime}` : `날짜 추후 공지 · ${event.startTime} 시작` },
+  { icon: "📍", label: event.venue },
+];
 
-  return (
-    <header className="hero" id="top">
-      <div className="container">
-        <article className="invite" aria-labelledby="invite-title">
-          <p className="invite__from">
-            <SchoolMark size={30} />
-            {event.school}
-          </p>
+// 메인 Hero 섹션: 페이지 최상단 헤더 역할 + 스크롤 전 사용자 인지 영역
+export const Hero = () => (
+  <header id="top" className="hero">
+    <div className="container">
+      {/* 초대 배지 */}
+      <span className="badge">Special Invitation</span>
 
-          <p className="invite__eyebrow">Invitation</p>
-          <h1 className="invite__title" id="invite-title">
-            <span className="invite__year">{event.year}</span> BRIDGE <em>DAY</em>
-          </h1>
-          <p className="invite__lead">
-            소프트웨어 인재를 위한 특별한 만남의 장에
-            <br />
-            여러분을 초대합니다.
-          </p>
+      {/* 행사 제목 및 주요 캐치프레이즈 */}
+      <h1>{event.year} BRIDGE DAY</h1>
+      <p className="subtitle">소프트웨어 인재를 위한 특별한 만남의 장</p>
 
-          <dl className="invite__facts">
-            <div>
-              <dt>
-                <Icon name="calendar" size={18} />
-                일시
-              </dt>
-              <dd>
-                {date ?? "날짜 추후 공지"} · {event.startTime} – {event.endTime}
-                {dday && <span className="invite__dday">{dday}</span>}
-              </dd>
-            </div>
-            <div>
-              <dt>
-                <Icon name="pin" size={18} />
-                장소
-              </dt>
-              <dd>
-                {event.venue}
-                <span className="invite__sub">{event.school}</span>
-              </dd>
-            </div>
-          </dl>
-
-          <div className="invite__cta">
-            <a className="invite__btn invite__btn--primary" href="#directions">
-              오시는 길
-              <Icon name="arrowRight" size={18} />
-            </a>
-            <a className="invite__btn" href="#schedule">
-              일정 보기
-            </a>
+      {/* 날짜/장소 등 핵심 정보 */}
+      <div className="event-info">
+        {eventInfo.map((info) => (
+          <div className="info-item" key={info.label}>
+            {/* 아이콘은 시각적 장식 용도이므로 aria-hidden 지정 */}
+            <span className="icon" aria-hidden>
+              {info.icon}
+            </span>
+            <span>{info.label}</span>
           </div>
-
-          <BridgeArt className="invite__bridge" />
-        </article>
+        ))}
       </div>
-    </header>
-  );
-};
+    </div>
+
+    {/* 페이지 아래로 안내하는 스크롤 힌트 영역 */}
+    <div className="scroll-indicator">
+      <span>아래로 스크롤</span>
+      <div className="arrow" />
+    </div>
+  </header>
+);
