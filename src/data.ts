@@ -2,35 +2,43 @@
 // 행사 정보가 바뀌면 이 파일만 고치면 됩니다.
 
 // ===== 행사 기본 정보 =====
-// Hero(첫 화면) · Footer · 오시는 길에서 사용합니다.
-// - date : 행사 날짜 (YYYY-MM-DD, 예: "2026-12-05"). 비워 두면 "날짜 추후 공지"로 표시되고,
-//          넣으면 "12월 5일 (토) 12:00"처럼 요일이 자동으로 붙습니다.
+// Hero(첫 화면) · About · Footer · 오시는 길에서 사용합니다.
+// - date : 행사 날짜 (YYYY-MM-DD). 비워 두면 "날짜 추후 공지"로 표시되고,
+//          넣으면 "12월 5일 (토)"처럼 요일이 자동으로 붙습니다.
 export const event = {
   year: 2026,
-  date: "",
+  date: "2026-12-05",
   startTime: "12:00",
+  endTime: "15:30",
   venue: "AI·DX 센터 1층",
+  school: "연암공과대학교",
+  department: "AI소프트웨어학과",
 };
 
 // 페이지 상단의 About 섹션에서
 // BRIDGE DAY 행사를 한눈에 소개하기 위한 특징 데이터입니다.
+// - icon: 카드 위 아이콘 (components/AboutSection.tsx 의 아이콘 이름)
 // - title: 특징 이름
 // - description: 특징에 대한 간단한 설명
 export type Feature = {
+  icon: "network" | "lunch" | "mentor";
   title: string;
   description: string;
 };
 
 export const features: Feature[] = [
   {
+    icon: "network",
     title: "Networking",
     description: "합격자 동기들, 그리고 선배들과 미리 친해질 수 있는 기회",
   },
   {
+    icon: "lunch",
     title: "Lunch & Gift",
     description: "맛있는 점심식사와 기념품 제공",
   },
   {
+    icon: "mentor",
     title: "Mentoring",
     description: "우수 선배들의 포트폴리오 발표와 현실적인 조언",
   },
@@ -54,40 +62,35 @@ export type TimelineItem = {
 export const timeline: TimelineItem[] = [
   {
     time: "12:00 ~ 13:00",
-    title: "출석체크 및 점심식사 (1시간)",
-    description: "조 배정 확인 후 조별로 함께하는 점심",
+    title: "출석체크 · 점심식사 & 아이스브레이킹 (1시간)",
+    description: "조 배정 확인 후 조별로 함께 점심을 먹으며 어색함 없애기",
   },
   {
     time: "13:00 ~ 13:10",
-    title: "아이스브레이킹 (10분)",
-    description: "조별로 어색함 없애기",
-  },
-  {
-    time: "13:10 ~ 13:20",
     title: "환영 인사 (10분)",
     description: "학회장, 부학회장 및 선배 참가자 소개",
   },
   {
-    time: "13:20 ~ 13:50",
+    time: "13:10 ~ 13:40",
     title: "학교 생활 소개 (30분)",
     description: "교육과정, 동아리, 취업처 등 학교 생활 가이드",
   },
   {
-    time: "13:50 ~ 14:00",
-    title: "휴식 (10분)",
-    description: "조별로 오픈 채팅방을 만들어 친해져보는건 어떨까요?",
-    type: "break",
-  },
-  {
-    time: "14:00 ~ 15:00",
-    title: "선배 포트폴리오 & 조언 (1시간)",
-    description: "선배 3명(양희승 · 김준성 · 최국진)이 한 명당 10~15분씩 포트폴리오와 대학생활 노하우를 들려줘요",
+    time: "13:40 ~ 14:10",
+    title: "선배 포트폴리오 & 조언 (30분)",
+    description: "선배 3명(양희승 · 김준성 · 최국진)의 포트폴리오와 대학생활 노하우",
     type: "highlight",
   },
   {
-    time: "15:00 ~ 16:00",
-    title: "AI·DX 센터 & 선배 프로젝트 체험 (1시간)",
-    description: "AI·DX 센터와 선배들이 만든 프로젝트를 직접 체험하고, 기념품 증정과 함께 마무리",
+    time: "14:10 ~ 14:50",
+    title: "AI·DX 센터 체험 (40분)",
+    description: "AI·DX 센터를 둘러보고 직접 체험하는 시간",
+    type: "highlight",
+  },
+  {
+    time: "14:50 ~ 15:30",
+    title: "선배 프로젝트 체험 (40분)",
+    description: "선배들이 만든 프로젝트를 직접 체험하고, 기념품 증정과 함께 마무리",
     type: "highlight",
   },
 ];
@@ -203,11 +206,27 @@ export const mentors: Mentor[] = [
     ],
   },
   {
-    // TODO: 학년 · 관심 분야 · 기술 스택 입력
-    grade: "",
+    grade: "3학년",
     name: "최국진",
-    interest: "",
-    stacks: [],
+    interest: "SAP · ABAP",
+    stacks: [
+      badge(
+        "SAP",
+        "https://img.shields.io/badge/SAP-0FAAFF?style=flat&logo=sap&logoColor=ffffff"
+      ),
+      badge(
+        "ABAP",
+        "https://img.shields.io/badge/ABAP-0B3C68?style=flat&logo=sap&logoColor=ffffff"
+      ),
+      badge(
+        "SAP Fiori",
+        "https://img.shields.io/badge/SAP%20Fiori-0FAAFF?style=flat&logo=sap&logoColor=ffffff"
+      ),
+      badge(
+        "SAPUI5",
+        "https://img.shields.io/badge/SAPUI5-0A6ED1?style=flat&logo=sap&logoColor=ffffff"
+      ),
+    ],
   },
 ];
 

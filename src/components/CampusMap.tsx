@@ -1,111 +1,82 @@
-import { MAP_HEIGHT, MAP_WIDTH, buildings, destinationCenter, greens, labels, roads, route, stops } from "../campusMap";
-import "./CampusMap.css";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { useEffect, useRef } from "react";
+import { destination, destinationOutline, gate, route } from "../campusRoute";
 
-const PAD = 10;
+// 지도 타일: 국토교통부 브이월드 (VITE_VWORLD_KEY, 배포 때 GitHub Actions 시크릿으로 넣어요).
+// 키가 없으면 Esri 위성사진 · OpenStreetMap 으로 대신 보여 줘요.
+// 위성지도에는 브이월드 라벨 층(Hybrid)을 겹치지 않아요: 학교 옛 이름(연암공업전문대학)이 떠서 헷갈려요.
+const KEY = import.meta.env.VITE_VWORLD_KEY;
+const vworld = (layer: string, ext: string) => `https://api.vworld.kr/req/wmts/1.0.0/${KEY}/${layer}/{z}/{y}/{x}.${ext}`;
+const VWORLD_CREDIT = '© <a href="https://www.vworld.kr" target="_blank" rel="noopener noreferrer">국토교통부 브이월드</a>';
+const TILE = { maxZoom: 19, maxNativeZoom: 19 };
 
-/**
- * 정문 → AI·DX 센터 지도 (위쪽 = 학교 안쪽/서쪽, 오른쪽 = 북쪽).
- * 정문에서 이어지는 길과 목적지만 표시해요.
- */
-export const CampusMap = () => {
-  const [destX, destY] = destinationCenter;
-  const [gateX, gateY] = stops[0].point;
+const satelliteLayer = () =>
+  KEY
+    ? L.tileLayer(vworld("Satellite", "jpeg"), { ...TILE, attribution: VWORLD_CREDIT })
+    : L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+        ...TILE,
+        attribution: "Imagery © Esri",
+      });
 
-  return (
-    <svg
-      className="campus-map"
-      viewBox={`${-PAD} ${-PAD} ${MAP_WIDTH + PAD * 2} ${MAP_HEIGHT + PAD * 2}`}
-      role="img"
-      aria-labelledby="campus-map-title campus-map-desc"
-    >
-      <title id="campus-map-title">정문에서 AI·DX 센터까지 가는 길 지도</title>
-      <desc id="campus-map-desc">
-        정문으로 들어와 오르막길을 따라 직진하다가 연암미래관 앞 갈림길에서 오른쪽으로 갑니다. 체육관(인화관) 앞에서
-        왼쪽으로 꺾어 산학협동관을 지나면 바로 다음 건물이 AI·DX 센터입니다.
-      </desc>
+const baseLayer = () =>
+  KEY
+    ? L.tileLayer(vworld("Base", "png"), { ...TILE, attribution: VWORLD_CREDIT })
+    : L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap contributors",
+      });
 
-      <defs>
-        <pattern id="map-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M20 0H0V20" fill="none" stroke="rgba(255,255,255,0.035)" strokeWidth="0.6" />
-        </pattern>
-      </defs>
+// 지도 위 글자 표시 (정문 · 목적지)
+const tag = (text: string, kind: "gate" | "dest") =>
+  L.divIcon({ className: `map-tag map-tag--${kind}`, html: `<span>${text}</span>`, iconSize: [0, 0], iconAnchor: [0, 0] });
 
-      <rect x={-PAD} y={-PAD} width={MAP_WIDTH + PAD * 2} height={MAP_HEIGHT + PAD * 2} fill="url(#map-grid)" />
+/** 정문에서 AI·DX 센터까지 실제 지도 (2D) */
+const CampusMap = () => {
+  const ref = useRef<HTMLDivElement>(null);
 
-      <g>
-        {greens.map((green, i) => (
-          <path key={i} className={`map-green map-green--${green.kind}`} d={green.d} />
-        ))}
-      </g>
+  useEffect(() => {
+    if (!ref.current) return;
+    // 휴대폰에서는 한 손가락으로 페이지를 스크롤할 수 있게 지도 끌기는 끄고, 두 손가락 확대만 남겨요.
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    const map = L.map(ref.current, {
+      scrollWheelZoom: false,
+      dragging: !touch,
+      minZoom: 15,
+      maxZoom: 19,
+    });
 
-      <g className="campus-map__roads">
-        {roads.map((road, i) => (
-          <path key={i} d={road.d} strokeWidth={road.w} />
-        ))}
-      </g>
+    const satellite = satelliteLayer().addTo(map);
+    L.control
+      .layers({ 위성지도: satellite, 일반지도: baseLayer() }, undefined, { position: "topright", collapsed: false })
+      .addTo(map);
 
-      <g>
-        {buildings.map((building) => (
-          <path key={building.name} className={`map-building map-building--${building.kind}`} d={building.d} />
-        ))}
-      </g>
+    // 타일 사이 미세한 틈으로 배경이 비쳐도 눈에 띄지 않게, 지도 종류에 맞는 배경색을 깔아요.
+    const container = map.getContainer();
+    container.style.background = "#22302a";
+    map.on("baselayerchange", (e: L.LayersControlEvent) => {
+      container.style.background = e.name === "위성지도" ? "#22302a" : "#f2efe9";
+    });
 
-      {/* 정문에서 목적지까지 가는 길 */}
-      <path className="map-route-glow" d={route.d} />
-      <path className="map-route" d={route.d} />
+    L.polyline(route, { color: "#fff", weight: 9, opacity: 0.85, lineCap: "round", lineJoin: "round", interactive: false }).addTo(map);
+    L.polyline(route, { color: "#0ea5e9", weight: 5, lineCap: "round", lineJoin: "round", interactive: false }).addTo(map);
+    L.polygon(destinationOutline, { color: "#fff", weight: 2, fillColor: "#e11d48", fillOpacity: 0.6, interactive: false }).addTo(map);
+    L.circleMarker(gate, { radius: 6, color: "#0ea5e9", weight: 3, fillColor: "#fff", fillOpacity: 1, interactive: false }).addTo(map);
+    L.marker(destination, { icon: tag("AI·DX 센터 1층", "dest"), interactive: false, keyboard: false }).addTo(map);
+    L.marker(gate, { icon: tag("정문", "gate"), interactive: false, keyboard: false }).addTo(map);
 
-      {/* 정문 */}
-      <circle className="map-start" cx={gateX} cy={gateY} r="5" />
+    // 경로 전체가 보이게 맞추되, 위쪽은 이름표가 잘리지 않게 여백을 더 둬요.
+    // (확대는 정수 단계만 써요: 반 단계 확대는 타일 경계에 가는 선이 보여요)
+    map.fitBounds(L.latLngBounds([...route, ...destinationOutline]), {
+      paddingTopLeft: [20, 56],
+      paddingBottomRight: [30, 24],
+    });
+    return () => {
+      map.remove();
+    };
+  }, []);
 
-      <g>
-        {labels.map((label) =>
-          label.kind === "gate" ? (
-            <g key={label.text} className="map-gate-label" transform={`translate(${label.x} ${label.y})`}>
-              <rect x="-19" y="-9.5" width="38" height="19" rx="9.5" />
-              <text dominantBaseline="central" textAnchor="middle">
-                {label.text}
-              </text>
-            </g>
-          ) : (
-            <text
-              key={label.text}
-              className={`map-label map-label--${label.kind}`}
-              x={label.x}
-              y={label.y}
-              textAnchor="middle"
-              dominantBaseline="central"
-            >
-              {label.text}
-            </text>
-          )
-        )}
-      </g>
-
-      {/* 목적지 표시 */}
-      <g className="map-dest" transform={`translate(${destX} ${destY})`}>
-        <circle className="map-dest__ring" r="24" />
-        <g transform="translate(0 -34)">
-          <path className="map-dest__pin" d="M-46 -12h92a6 6 0 0 1 6 6v12a6 6 0 0 1-6 6H6l-6 7-6-7h-40a6 6 0 0 1-6-6v-12a6 6 0 0 1 6-6z" />
-          <text dominantBaseline="central" textAnchor="middle">
-            AI·DX 센터 1층
-          </text>
-        </g>
-      </g>
-
-      {/* 방위 · 축척 */}
-      <g className="map-compass" transform={`translate(${MAP_WIDTH - 16} 16)`}>
-        <circle r="14" />
-        <path d="M-7 0H7M2.5-4.5 7 0 2.5 4.5" />
-        <text x="0" y="25" textAnchor="middle">
-          북쪽
-        </text>
-      </g>
-      <g className="map-scale" transform={`translate(4 ${MAP_HEIGHT - 4})`}>
-        <path d="M0-4V0H50V-4" />
-        <text x="25" y="-9" textAnchor="middle">
-          50m
-        </text>
-      </g>
-    </svg>
-  );
+  return <div ref={ref} className="campus-map-live" role="region" aria-label="정문에서 AI·DX 센터까지 가는 길 지도" />;
 };
+
+export default CampusMap;

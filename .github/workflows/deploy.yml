@@ -28,6 +28,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # 오시는 길 지도(브이월드) 키. 저장소 Settings → Secrets and variables → Actions 에 등록해요.
+          # 없으면 지도가 Esri 위성사진 · OpenStreetMap 으로 대신 보여요.
+          VITE_VWORLD_KEY: ${{ secrets.VITE_VWORLD_KEY }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

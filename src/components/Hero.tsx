@@ -2,10 +2,10 @@ import { event } from "../data";
 import { formatDate } from "../lib/format";
 
 // 행사 기본 정보를 렌더링할 데이터 배열 (아이콘 + 텍스트)
-// 날짜와 장소는 data.ts 의 event 에서 가져와요.
-const date = formatDate(event.date);
+// 날짜 · 시간 · 장소는 data.ts 의 event 에서 가져와요.
 const eventInfo = [
-  { icon: "📅", label: date ? `${date} ${event.startTime}` : `날짜 추후 공지 · ${event.startTime} 시작` },
+  { icon: "📅", label: formatDate(event.date) ?? "날짜 추후 공지" },
+  { icon: "⏰", label: `${event.startTime} ~ ${event.endTime}` },
   { icon: "📍", label: event.venue },
 ];
 
@@ -16,11 +16,16 @@ export const Hero = () => (
       {/* 초대 배지 */}
       <span className="badge">Special Invitation</span>
 
+      {/* 주최 */}
+      <p className="host">
+        {event.school} {event.department}
+      </p>
+
       {/* 행사 제목 및 주요 캐치프레이즈 */}
       <h1>{event.year} BRIDGE DAY</h1>
       <p className="subtitle">소프트웨어 인재를 위한 특별한 만남의 장</p>
 
-      {/* 날짜/장소 등 핵심 정보 */}
+      {/* 날짜/시간/장소 등 핵심 정보 */}
       <div className="event-info">
         {eventInfo.map((info) => (
           <div className="info-item" key={info.label}>
@@ -31,6 +36,16 @@ export const Hero = () => (
             <span>{info.label}</span>
           </div>
         ))}
+      </div>
+
+      {/* 바로가기 */}
+      <div className="hero-cta">
+        <a className="hero-cta__primary" href="#directions">
+          오시는 길
+        </a>
+        <a className="hero-cta__secondary" href="#schedule">
+          일정 보기
+        </a>
       </div>
     </div>
 

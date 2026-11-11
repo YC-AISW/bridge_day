@@ -5,7 +5,7 @@ export const Footer = () => (
     <div className="container">
       <p>{event.year} BRIDGE DAY</p>
       <p className="sub-footer">
-        문의사항이 있으시면 학과 사무실 (055-751-2190 | 055-751-2199) 로
+        문의사항이 있으시면 {event.department} 사무실 (055-751-2190 | 055-751-2199) 로
         연락주세요.
       </p>
     </div>

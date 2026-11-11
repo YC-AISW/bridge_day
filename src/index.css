@@ -64,125 +64,6 @@ body {
   padding: 0 20px;
 }
 
-/* ===== 상단 고정 네비게이션 바 ===== */
-.main-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(15, 23, 42, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  transform: translateY(-120%);
-  opacity: 0;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  z-index: 15;
-}
-
-/* Hero 영역에서 벗어나면 나타나는 상태 */
-.main-nav.visible {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.main-nav .nav-links.mobile {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-}
-
-.nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.nav-logo {
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  font-size: 0.95rem;
-  color: var(--primary-color);
-}
-
-/* 네비 링크 공통 */
-.nav-links {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.nav-links.desktop {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-/* 모바일 드롭다운 네비 */
-.nav-links.mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px 20px 20px;
-  background: rgba(15, 23, 42, 0.95);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.nav-links.mobile a {
-  width: 100%;
-  text-align: left;
-}
-
-/* 모바일 햄버거 버튼 */
-.nav-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.nav-toggle span {
-  width: 20px;
-  height: 2px;
-  background: #fff;
-  border-radius: 999px;
-  display: block;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-/* 햄버거 → X 아이콘 전환 */
-.nav-toggle.active span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-}
-.nav-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-.nav-toggle.active span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-/* 네비 링크 스타일 */
-.nav-links a {
-  color: #cbd5f5;
-  font-size: 0.95rem;
-  text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
 /* ===== Hero 영역 ===== */
 .hero {
   height: 100vh;
@@ -674,22 +555,6 @@ section h2 {
 }
 
 @media (max-width: 640px) {
-  .nav-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 10px 16px;
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  .nav-links.desktop {
-    display: none;
-  }
-
   section {
     padding: 70px 0;
   }
@@ -823,31 +688,310 @@ footer .sub-footer {
   }
 }
 
-/* ===== 오시는 길: 정문 → AI·DX 센터 지도 ===== */
+/* ===== Hero: 주최 · 바로가기 버튼 ===== */
+.hero {
+  height: auto;
+  min-height: 100vh;
+  padding: 100px 0 130px;
+}
+
+.hero .host {
+  margin-bottom: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #cbd5e1;
+  animation: fadeInUp 1s ease-out 0.1s backwards;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  animation: fadeInUp 1s ease-out 0.8s backwards;
+}
+
+.hero-cta a {
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  border: 1px solid var(--primary-color);
+  transition: background-color 0.2s;
+}
+
+.hero-cta__primary {
+  color: #0f172a;
+  background: var(--primary-color);
+}
+
+.hero-cta__primary:hover {
+  background: #7dd3fc;
+}
+
+.hero-cta__secondary {
+  color: var(--primary-color);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.hero-cta__secondary:hover {
+  background: rgba(56, 189, 248, 0.18);
+}
+
+/* ===== About: 카드 아이콘 ===== */
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  color: var(--primary-color);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* ===== 오른쪽 섹션 바로가기 (세로 점) ===== */
+.side-nav {
+  --dot-col: 36px;
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  transform: translateY(-50%);
+}
+
+.side-nav__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--dot-col);
+  height: var(--dot-col);
+  border-radius: 50%;
+  color: #e2e8f0;
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.side-nav__arrow:hover:not(:disabled) {
+  background: rgba(51, 65, 85, 0.95);
+}
+
+.side-nav__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.side-nav__dots {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px 0;
+}
+
+/* 점을 잇는 세로선 */
+.side-nav__dots::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: calc(var(--dot-col) / 2 - 0.5px);
+  width: 1px;
+  background: rgba(148, 163, 184, 0.3);
+}
+
+.side-nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--dot-col);
+  height: 22px;
+}
+
+.side-nav__dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #64748b;
+  transition: all 0.25s ease;
+}
+
+.side-nav__link:hover .side-nav__dot {
+  background: #cbd5e1;
+}
+
+.side-nav__link.is-active .side-nav__dot {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.15),
+    0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+/* 섹션 이름표: 현재 섹션 (마우스를 올리면 다른 섹션도) */
+.side-nav__label {
+  position: absolute;
+  right: 100%;
+  margin-right: 4px;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+
+.side-nav__link.is-active .side-nav__label,
+.side-nav__link:hover .side-nav__label,
+.side-nav__link:focus-visible .side-nav__label {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== 오시는 길: 실제 지도 (Leaflet + 브이월드) ===== */
 .directions-map {
-  max-width: 520px;
+  max-width: 1000px;
   margin: 30px auto 0;
-  padding: 12px;
+  padding: 10px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
 }
 
-.directions-map .campus-map {
-  border-radius: 12px;
-  background: #0b1226;
+.campus-map-live {
+  position: relative;
+  z-index: 0;
+  height: 480px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #1e293b;
+  font-family: inherit;
 }
 
-.directions-map figcaption {
-  padding: 12px 4px 4px;
-  font-size: 0.85rem;
-  color: #94a3b8;
-  text-align: center;
+.campus-map-live--loading {
+  background: linear-gradient(90deg, #1e293b, #273449, #1e293b);
 }
 
-.directions-credit {
-  margin-top: 10px;
-  font-size: 0.7rem;
-  color: #64748b;
-  text-align: center;
+/* 지도 위 상자들은 밝은 배경이라 글자색을 어둡게 */
+.campus-map-live .leaflet-control-layers {
+  color: #1e293b;
+  font-size: 13px;
+}
+
+.campus-map-live .leaflet-control-layers label {
+  cursor: pointer;
+}
+
+/* 페이지의 section { padding: 100px 0 } 규칙이 Leaflet 안의 section 에 걸리지 않게 */
+.campus-map-live section {
+  padding: 0;
+}
+
+/* 정문 · 목적지 이름표 */
+.map-tag span {
+  position: absolute;
+  left: 0;
+  bottom: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.map-tag span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  border: 6px solid transparent;
+  transform: translateX(-50%);
+}
+
+/* 목적지는 경로 서쪽 끝이라, 이름표를 오른쪽(동쪽)으로 펼쳐 화면 밖으로 잘리지 않게 */
+.map-tag--dest span {
+  left: -14px;
+  color: #fff;
+  background: #e11d48;
+  transform: none;
+}
+
+.map-tag--dest span::after {
+  left: 14px;
+  border-top-color: #e11d48;
+}
+
+.map-tag--gate span {
+  color: #0f172a;
+  background: #fff;
+}
+
+.map-tag--gate span::after {
+  border-top-color: #fff;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 80px 0 120px;
+  }
+
+  .event-info {
+    gap: 10px;
+  }
+
+  /* 휴대폰: 화살표는 숨기고 작은 점만, 이름표는 현재 섹션도 숨겨서 내용을 가리지 않게 */
+  .side-nav {
+    --dot-col: 18px;
+    right: 2px;
+  }
+
+  .side-nav__arrow {
+    display: none;
+  }
+
+  .side-nav__dots {
+    gap: 2px;
+  }
+
+  .side-nav__dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .side-nav__link.is-active .side-nav__dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .side-nav__link.is-active .side-nav__label {
+    opacity: 0;
+  }
+
+  .container {
+    padding: 0 28px;
+  }
+
+  .campus-map-live {
+    height: 340px;
+  }
 }
