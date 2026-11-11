@@ -889,6 +889,14 @@ footer .sub-footer {
   background: linear-gradient(90deg, #1e293b, #273449, #1e293b);
 }
 
+/* 지도 출처 (지도 아래 작은 글씨) */
+.map-credit {
+  margin: 8px 4px 0;
+  font-size: 0.7rem;
+  color: #64748b;
+  text-align: right;
+}
+
 /* 지도 위 상자들은 밝은 배경이라 글자색을 어둡게 */
 .campus-map-live .leaflet-control-layers {
   color: #1e293b;

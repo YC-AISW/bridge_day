@@ -8,24 +8,18 @@ import { destination, destinationOutline, gate, route } from "../campusRoute";
 // 위성지도에는 브이월드 라벨 층(Hybrid)을 겹치지 않아요: 학교 옛 이름(연암공업전문대학)이 떠서 헷갈려요.
 const KEY = import.meta.env.VITE_VWORLD_KEY;
 const vworld = (layer: string, ext: string) => `https://api.vworld.kr/req/wmts/1.0.0/${KEY}/${layer}/{z}/{y}/{x}.${ext}`;
-const VWORLD_CREDIT = '© <a href="https://www.vworld.kr" target="_blank" rel="noopener noreferrer">국토교통부 브이월드</a>';
 const TILE = { maxZoom: 19, maxNativeZoom: 19 };
+
+// 지도 출처: 지도 위 상자 대신 지도 아래에 글자로 적어요 (브이월드는 출처 표시가 필요해요).
+const CREDIT = KEY ? "지도 © 국토교통부 브이월드" : "지도 © Esri, © OpenStreetMap contributors";
 
 const satelliteLayer = () =>
   KEY
-    ? L.tileLayer(vworld("Satellite", "jpeg"), { ...TILE, attribution: VWORLD_CREDIT })
-    : L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
-        ...TILE,
-        attribution: "Imagery © Esri",
-      });
+    ? L.tileLayer(vworld("Satellite", "jpeg"), TILE)
+    : L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", TILE);
 
 const baseLayer = () =>
-  KEY
-    ? L.tileLayer(vworld("Base", "png"), { ...TILE, attribution: VWORLD_CREDIT })
-    : L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution: "© OpenStreetMap contributors",
-      });
+  KEY ? L.tileLayer(vworld("Base", "png"), TILE) : L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", TILE);
 
 // 지도 위 글자 표시 (정문 · 목적지)
 const tag = (text: string, kind: "gate" | "dest") =>
@@ -40,6 +34,7 @@ const CampusMap = () => {
     // 휴대폰에서는 한 손가락으로 페이지를 스크롤할 수 있게 지도 끌기는 끄고, 두 손가락 확대만 남겨요.
     const touch = window.matchMedia("(pointer: coarse)").matches;
     const map = L.map(ref.current, {
+      attributionControl: false, // 지도 위 "Leaflet | © ..." 상자는 숨기고 출처는 지도 아래에
       scrollWheelZoom: false,
       dragging: !touch,
       minZoom: 15,
@@ -76,7 +71,12 @@ const CampusMap = () => {
     };
   }, []);
 
-  return <div ref={ref} className="campus-map-live" role="region" aria-label="정문에서 AI·DX 센터까지 가는 길 지도" />;
+  return (
+    <>
+      <div ref={ref} className="campus-map-live" role="region" aria-label="정문에서 AI·DX 센터까지 가는 길 지도" />
+      <p className="map-credit">{CREDIT}</p>
+    </>
+  );
 };
 
 export default CampusMap;
