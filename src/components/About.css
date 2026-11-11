@@ -1,15 +1,23 @@
 /* ===== 행사 소개 ===== */
+#about .section-lead {
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.75;
+  color: var(--text);
+}
+
 .features {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
 .feature {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 26px 18px 24px;
+  text-align: center;
   border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--line);
@@ -19,31 +27,52 @@
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  color: var(--accent);
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: var(--accent-2);
   background: var(--accent-soft);
 }
 
 .feature__title {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 800;
 }
 
 .feature__text {
-  margin-top: 2px;
-  font-size: 15px;
+  margin-top: 4px;
+  font-size: 15.5px;
+  line-height: 1.6;
   color: var(--text-2);
 }
 
-@media (max-width: 639px) {
+@media (max-width: 899px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 휴대폰: 아이콘 옆에 글 */
+@media (max-width: 559px) {
   .features {
     grid-template-columns: 1fr;
     gap: 10px;
   }
 
   .feature {
-    padding: 16px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 16px;
+    text-align: left;
+  }
+
+  .feature__icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .feature__title {
+    font-size: 17px;
   }
 }

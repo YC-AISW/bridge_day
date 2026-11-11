@@ -1,39 +1,11 @@
 /* ===== 오시는 길 ===== */
-.directions__layout {
-  display: grid;
-  gap: 24px;
-}
-
-/* --- 지도 카드 --- */
 .map-card {
+  max-width: 520px;
+  margin-inline: auto;
   padding: 12px;
   border-radius: var(--radius);
-  scroll-margin-top: 16px;
   background: var(--surface);
   border: 1px solid var(--line-2);
-}
-
-.map-card__caption {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  padding: 4px 6px 10px;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.map-card__num {
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  font-size: 13px;
-  font-weight: 800;
-  color: #fff;
-  background: var(--accent);
 }
 
 .map-card .campus-map {
@@ -41,46 +13,14 @@
   background: #0b1226;
 }
 
-.map-card__controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 2px 2px;
-}
-
-.map-card__pager {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--text-2);
-}
-
-.map-card__pager button {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--surface-2);
-  border: 1px solid var(--line-2);
-}
-
-.map-card__pager button:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
 .map-card__note {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 10px 4px 2px;
-  font-size: 13px;
-  color: var(--text-3);
+  padding: 12px 4px 4px;
+  font-size: 13.5px;
+  color: var(--text-2);
 }
 
 .map-card__note svg {
@@ -89,256 +29,8 @@
 }
 
 .map-card__credit {
-  margin-top: 8px;
+  margin-top: 10px;
   font-size: 11px;
   text-align: center;
   color: var(--text-3);
-}
-
-/* --- 단계 카드 --- */
-.route-steps {
-  display: grid;
-  gap: 10px;
-}
-
-.route-step {
-  display: grid;
-  grid-template-columns: 36px 1fr 180px;
-  gap: 16px;
-  align-items: start;
-  padding: 16px;
-  border-radius: var(--radius);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  cursor: pointer;
-  transition:
-    background-color 0.2s,
-    border-color 0.2s;
-}
-
-.route-step[data-state="active"] {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-}
-
-.route-step__num {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--text-2);
-  background: var(--surface-2);
-}
-
-.route-step[data-state="past"] .route-step__num {
-  color: var(--accent-2);
-}
-
-.route-step[data-state="active"] .route-step__num {
-  color: #fff;
-  background: var(--accent);
-}
-
-.route-step__leg {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent-2);
-}
-
-.route-step__title {
-  margin-top: 2px;
-  font-size: 18px;
-  font-weight: 800;
-}
-
-.route-step__text {
-  margin-top: 4px;
-  font-size: 15px;
-  color: var(--text-2);
-}
-
-.route-step__photo,
-.route-step__goal {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  border-radius: 10px;
-}
-
-.route-step__photo {
-  object-fit: cover;
-  background: var(--surface-2);
-}
-
-.route-step__goal {
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 6px;
-  font-size: 15px;
-  font-weight: 800;
-  color: #fff;
-  background: var(--accent);
-}
-
-/* 넓은 화면: 지도는 고정, 스크롤하면 화면 가운데 단계가 지도에 표시돼요 */
-@media (min-width: 960px) {
-  .directions__layout {
-    grid-template-columns: minmax(360px, 0.95fr) 1.05fr;
-    gap: 36px;
-    align-items: start;
-  }
-
-  .directions__map-col {
-    position: sticky;
-    top: 88px;
-  }
-
-  .directions__map-col .campus-map {
-    max-height: calc(100vh - 290px);
-  }
-
-  .route-steps {
-    padding-bottom: 20vh;
-  }
-}
-
-/* 좁은 화면: 사진은 글 아래로 */
-@media (max-width: 639px) {
-  .route-step {
-    grid-template-columns: 32px 1fr;
-    gap: 10px 12px;
-    padding: 14px;
-  }
-
-  .route-step__num {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-
-  .route-step__photo,
-  .route-step__goal {
-    grid-column: 2;
-  }
-
-  .route-step__title {
-    font-size: 17px;
-  }
-}
-
-/* --- 학교까지 오는 법 --- */
-.getting-here {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 24px 40px;
-  margin-top: clamp(32px, 5vw, 48px);
-  padding: clamp(20px, 3vw, 32px);
-  border-radius: var(--radius);
-  background: var(--surface);
-  border: 1px solid var(--line);
-}
-
-.getting-here__title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--accent-2);
-}
-
-.getting-here__address {
-  margin-top: 10px;
-  font-size: clamp(18px, 2.2vw, 22px);
-  font-weight: 800;
-  line-height: 1.4;
-}
-
-.getting-here__address span {
-  display: block;
-  margin-top: 2px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-3);
-}
-
-.getting-here__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.getting-here__kakao {
-  color: #191919;
-  background: #fee500;
-  border-color: transparent;
-}
-
-.getting-here__naver {
-  color: #fff;
-  background: #03c75a;
-  border-color: transparent;
-}
-
-.getting-here__kakao:hover,
-.getting-here__naver:hover {
-  border-color: transparent;
-}
-
-.getting-here__hint {
-  margin-top: 10px;
-  font-size: 13px;
-  color: var(--text-3);
-}
-
-.getting-here__transit {
-  display: grid;
-  gap: 10px;
-}
-
-.getting-here__transit li {
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: var(--surface-2);
-}
-
-.getting-here__from {
-  margin-bottom: 4px;
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.getting-here__way {
-  display: grid;
-  grid-template-columns: 18px 1fr;
-  gap: 10px;
-  margin-top: 6px;
-  font-size: 14px;
-  color: var(--text-2);
-}
-
-.getting-here__way svg {
-  margin-top: 2px;
-  color: var(--accent-2);
-}
-
-.getting-here__source {
-  grid-column: 1 / -1;
-  font-size: 12px;
-  color: var(--text-3);
-}
-
-.getting-here__source a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-@media (max-width: 859px) {
-  .getting-here {
-    grid-template-columns: 1fr;
-  }
 }

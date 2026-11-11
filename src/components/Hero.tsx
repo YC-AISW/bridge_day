@@ -2,57 +2,69 @@ import { event } from "../data";
 import { ddayLabel, formatDate } from "../lib/format";
 import { BridgeArt } from "./BridgeArt";
 import { Icon } from "./Icon";
+import { SchoolMark } from "./SchoolMark";
 import "./Hero.css";
 
-/** 첫 화면: 행사명 · 일시 · 장소 */
+/** 첫 화면: 연암공과대학교에서 보내는 초대장 */
 export const Hero = () => {
   const date = formatDate(event.date);
   const dday = ddayLabel(event.date);
 
   return (
     <header className="hero" id="top">
-      <div className="container hero__inner">
-        <p className="hero__badge">Special Invitation</p>
-        <h1 className="hero__title">
-          <span className="hero__year">{event.year}</span> BRIDGE <em>DAY</em>
-        </h1>
-        <p className="hero__subtitle">소프트웨어 인재를 위한 특별한 만남의 장</p>
+      <div className="container">
+        <article className="invite" aria-labelledby="invite-title">
+          <p className="invite__from">
+            <SchoolMark size={30} />
+            {event.school}
+          </p>
 
-        <dl className="hero__facts">
-          <div>
-            <dt>
-              <Icon name="calendar" size={18} />
-              일시
-            </dt>
-            <dd>
-              {date ?? "날짜 추후 공지"} · {event.startTime} – {event.endTime}
-              {dday && <span className="hero__dday">{dday}</span>}
-            </dd>
-          </div>
-          <div>
-            <dt>
-              <Icon name="pin" size={18} />
-              장소
-            </dt>
-            <dd>
-              {event.venue}
-              <span className="hero__school">{event.school}</span>
-            </dd>
-          </div>
-        </dl>
+          <p className="invite__eyebrow">Invitation</p>
+          <h1 className="invite__title" id="invite-title">
+            <span className="invite__year">{event.year}</span> BRIDGE <em>DAY</em>
+          </h1>
+          <p className="invite__lead">
+            소프트웨어 인재를 위한 특별한 만남의 장에
+            <br />
+            여러분을 초대합니다.
+          </p>
 
-        <div className="hero__cta">
-          <a className="btn btn--primary" href="#directions">
-            오시는 길
-            <Icon name="arrowRight" size={18} />
-          </a>
-          <a className="btn" href="#schedule">
-            일정 보기
-          </a>
-        </div>
+          <dl className="invite__facts">
+            <div>
+              <dt>
+                <Icon name="calendar" size={18} />
+                일시
+              </dt>
+              <dd>
+                {date ?? "날짜 추후 공지"} · {event.startTime} – {event.endTime}
+                {dday && <span className="invite__dday">{dday}</span>}
+              </dd>
+            </div>
+            <div>
+              <dt>
+                <Icon name="pin" size={18} />
+                장소
+              </dt>
+              <dd>
+                {event.venue}
+                <span className="invite__sub">{event.school}</span>
+              </dd>
+            </div>
+          </dl>
+
+          <div className="invite__cta">
+            <a className="invite__btn invite__btn--primary" href="#directions">
+              오시는 길
+              <Icon name="arrowRight" size={18} />
+            </a>
+            <a className="invite__btn" href="#schedule">
+              일정 보기
+            </a>
+          </div>
+
+          <BridgeArt className="invite__bridge" />
+        </article>
       </div>
-
-      <BridgeArt />
     </header>
   );
 };

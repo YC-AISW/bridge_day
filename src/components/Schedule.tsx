@@ -3,7 +3,7 @@ import { durationLabel } from "../lib/format";
 import { SectionHead } from "./SectionHead";
 import "./Schedule.css";
 
-/** 타임테이블: 시간 | 내용 */
+/** 타임테이블 (2025년과 같은 타임라인 모양) */
 export const Schedule = () => {
   const first = timeline[0];
   const last = timeline[timeline.length - 1];
@@ -17,31 +17,24 @@ export const Schedule = () => {
           </p>
         </SectionHead>
 
-        <ol className="schedule">
+        <ol className="timeline">
           {timeline.map((item) => (
-            <li key={item.start} className={`schedule__item${item.type ? ` schedule__item--${item.type}` : ""}`}>
-              <p className="schedule__time">
-                <time>{item.start}</time> – <time>{item.end}</time>
-              </p>
-              <div className="schedule__body">
-                <h3 className="schedule__title">
-                  {item.title}
-                  <span className="schedule__duration">{durationLabel(item.start, item.end)}</span>
+            <li
+              key={item.start}
+              className={["timeline-item", item.type === "highlight" && "highlight", item.type === "break" && "break"]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <span className="time">
+                {item.start} ~ {item.end}
+              </span>
+              <div className="content">
+                <h3>
+                  {item.title} ({durationLabel(item.start, item.end)})
                 </h3>
-                <p className="schedule__text">{item.description}</p>
-                {item.mentors && (
-                  <p className="schedule__extra">
-                    <span>발표</span>
-                    {mentors.map((mentor) => mentor.name).join(" · ")}
-                  </p>
-                )}
-                {item.details && (
-                  <ul className="schedule__details">
-                    {item.details.map((detail) => (
-                      <li key={detail}>{detail}</li>
-                    ))}
-                  </ul>
-                )}
+                <p>{item.description}</p>
+                {item.mentors && <p className="extra">발표 · {mentors.map((mentor) => mentor.name).join(", ")}</p>}
+                {item.details && <p className="extra">{item.details.join(" · ")}</p>}
               </div>
             </li>
           ))}

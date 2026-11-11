@@ -19,12 +19,17 @@
   --text-2: #b7c0d6;
   --text-3: #8892ad;
 
-  /* 강조색 */
-  --accent: #5b8cff;
-  --accent-2: #2fd6f2;
-  --accent-soft: rgba(91, 140, 255, 0.13);
+  /* 학교 심벌 색 (연암공과대학교: 파랑 · 빨강 · 회색) */
+  --school-blue: #559cb5;
+  --school-blue-ink: #286b82;
+  --school-red: #d81247;
+  --school-gray: #6d6e71;
+
+  /* 강조색: 학교 파랑 (어두운 배경용으로 밝힌 글자색 포함) */
+  --accent: #2f7f9c;
+  --accent-2: #7cc6de;
+  --accent-soft: rgba(85, 156, 181, 0.16);
   --amber: #ffcf5c;
-  --grad: linear-gradient(100deg, var(--accent), var(--accent-2));
 
   /* 글꼴 */
   --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo",
@@ -166,11 +171,14 @@ strong {
 }
 
 /* ---------- 섹션 제목 ---------- */
+/* 2025년처럼 섹션 제목은 가운데 */
 .section-head {
   display: grid;
+  justify-items: center;
   gap: 10px;
   max-width: 680px;
-  margin-bottom: clamp(28px, 4vw, 40px);
+  margin: 0 auto clamp(28px, 4vw, 40px);
+  text-align: center;
 }
 
 .section-title {
@@ -182,6 +190,7 @@ strong {
 .section-lead {
   font-size: clamp(15px, 1.8vw, 17px);
   color: var(--text-2);
+  text-wrap: balance;
 }
 
 /* ---------- 버튼 ---------- */
@@ -214,7 +223,7 @@ strong {
 }
 
 .btn--primary:hover {
-  background: #4a7cf0;
+  background: var(--school-blue-ink);
   border-color: transparent;
 }
 
@@ -223,15 +232,6 @@ strong {
   padding: 0 14px;
   font-size: 14px;
   border-radius: 10px;
-}
-
-/* ---------- 화면 밖 애니메이션 멈춤 ----------
-   data-anim 요소가 화면에서 벗어나면 data-paused="true" 가 붙어요 (hooks/usePauseOffscreen.ts). */
-[data-paused="true"],
-[data-paused="true"] *,
-[data-paused="true"] *::before,
-[data-paused="true"] *::after {
-  animation-play-state: paused !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

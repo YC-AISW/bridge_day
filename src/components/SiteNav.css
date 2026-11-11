@@ -28,6 +28,9 @@
 }
 
 .site-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-right: 6px;
   font-family: var(--font-display);
   font-size: 13px;

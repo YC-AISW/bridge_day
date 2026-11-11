@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Icon, type IconName } from "./Icon";
+import { SchoolMark } from "./SchoolMark";
 import "./SiteNav.css";
 
 const LINKS: { id: string; label: string; icon: IconName }[] = [
@@ -65,6 +66,7 @@ export const SiteNav = () => {
   return (
     <nav className={`site-nav${visible ? " is-visible" : ""}`} aria-label="섹션 바로가기">
       <a className="site-nav__logo" href="#top">
+        <SchoolMark size={18} />
         BRIDGE DAY
       </a>
       <ul className="site-nav__list" ref={listRef}>

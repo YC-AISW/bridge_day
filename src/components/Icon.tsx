@@ -22,8 +22,6 @@ const ICONS = {
   ),
   arrowRight: <path d="M5 12h14M13 6l6 6-6 6" />,
   arrowUp: <path d="M12 19V5M6 11l6-6 6 6" />,
-  chevronLeft: <path d="M15 5l-7 7 7 7" />,
-  chevronRight: <path d="M9 5l7 7-7 7" />,
   users: (
     <>
       <circle cx="9" cy="8" r="3.5" />
@@ -49,36 +47,10 @@ const ICONS = {
       <path d="M19 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" />
     </>
   ),
-  check: <path d="M4.5 12.5l5 5 10-11" />,
-  copy: (
-    <>
-      <rect x="8.5" y="8.5" width="12" height="12" rx="2.5" />
-      <path d="M15.5 8.5V5A1.5 1.5 0 0 0 14 3.5H5A1.5 1.5 0 0 0 3.5 5v9A1.5 1.5 0 0 0 5 15.5h3.5" />
-    </>
-  ),
-  external: <path d="M14 4h6v6M20 4l-9 9M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10" />,
-  bus: (
-    <>
-      <rect x="4" y="3" width="16" height="15" rx="3" />
-      <path d="M4 11h16M8 21v-3M16 21v-3" />
-      <circle cx="8" cy="14.5" r=".8" fill="currentColor" />
-      <circle cx="16" cy="14.5" r=".8" fill="currentColor" />
-    </>
-  ),
-  taxi: (
-    <>
-      <path d="M5 17.5V12l2-5h10l2 5v5.5M3.5 17.5h17M7 17.5V20M17 17.5V20M5 12h14M10 4h4" />
-      <circle cx="8" cy="14.7" r=".8" fill="currentColor" />
-      <circle cx="16" cy="14.7" r=".8" fill="currentColor" />
-    </>
-  ),
-  map: <path d="M9 4.5 3.5 6.8v13l5.5-2.3 6 2.5 5.5-2.3v-13L15 7 9 4.5zM9 4.5v13M15 7v13" />,
   phone: (
     <path d="M5.2 3.5h3.3l1.6 4.4-2.1 1.4a12 12 0 0 0 6.7 6.7l1.4-2.1 4.4 1.6v3.3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.2 5.7a2 2 0 0 1 2-2.2z" />
   ),
-  play: <path d="M7.5 4.8v14.4a1 1 0 0 0 1.5.9l11.4-7.2a1 1 0 0 0 0-1.8L9 3.9a1 1 0 0 0-1.5.9z" fill="currentColor" stroke="none" />,
   code: <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16" />,
-  flag: <path d="M5.5 21V4M5.5 4.5h11.5l-2.3 4.2 2.3 4.3H5.5" />,
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof ICONS;

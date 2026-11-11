@@ -6,11 +6,8 @@ import { Hero } from "./components/Hero";
 import { Mentors } from "./components/Mentors";
 import { Schedule } from "./components/Schedule";
 import { SiteNav } from "./components/SiteNav";
-import { usePauseOffscreen } from "./hooks/usePauseOffscreen";
 
 const App = () => {
-  usePauseOffscreen();
-
   return (
     <>
       <a className="skip-link" href="#main">

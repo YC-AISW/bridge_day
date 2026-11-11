@@ -11,6 +11,9 @@
 }
 
 .footer__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 17px;
   font-weight: 800;
 }

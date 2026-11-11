@@ -1,4 +1,4 @@
-/* ===== 캠퍼스 길 안내 지도 (SVG) ===== */
+/* ===== 캠퍼스 지도 (SVG, 움직임 없음) ===== */
 .campus-map {
   display: block;
   width: 100%;
@@ -17,7 +17,7 @@
 
 .map-green--pitch {
   fill: rgba(47, 214, 242, 0.06);
-  stroke: rgba(47, 214, 242, 0.28);
+  stroke: rgba(47, 214, 242, 0.24);
   stroke-width: 0.8;
   stroke-dasharray: 3 2;
 }
@@ -43,85 +43,43 @@
 
 .map-building--landmark {
   fill: #1c2754;
-  stroke: #4a63b0;
+  stroke: #4a5f9e;
   stroke-width: 1;
 }
 
+/* 목적지 건물: 학교 빨강 */
 .map-building--destination {
-  fill: url(#map-dest);
-  stroke: #e9e4ff;
-  stroke-width: 1.4;
+  fill: var(--school-red);
+  stroke: #fff;
+  stroke-width: 1.6;
 }
 
-/* 목적지 퍼지는 원 */
-.map-dest-ring {
-  fill: none;
-  stroke: rgba(181, 123, 255, 0.75);
-  stroke-width: 1.4;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: map-ripple 2.6s var(--ease-out) infinite;
-}
-
-.map-dest-ring--late {
-  animation-delay: 1.3s;
-}
-
-@keyframes map-ripple {
-  from {
-    opacity: 0.9;
-    transform: scale(0.45);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-}
-
-/* 경로 */
-.map-route-base,
-.map-route-flow,
-.map-route-glow,
-.map-route-progress {
+/* 정문에서 이어지는 길 */
+.map-route,
+.map-route-glow {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.map-route-base {
-  stroke: rgba(255, 255, 255, 0.1);
-  stroke-width: 11;
-}
-
-.map-route-flow {
-  stroke: rgba(220, 235, 255, 0.75);
-  stroke-width: 2;
-  stroke-dasharray: 1.5 7;
-  animation: map-flow 0.9s linear infinite;
-}
-
-@keyframes map-flow {
-  to {
-    stroke-dashoffset: -8.5;
-  }
-}
-
 .map-route-glow {
-  stroke: url(#map-route);
-  stroke-width: 14;
-  opacity: 0.28;
+  stroke: var(--school-blue);
+  stroke-width: 13;
+  opacity: 0.25;
 }
 
-.map-route-progress {
-  stroke: url(#map-route);
-  stroke-width: 6;
+.map-route {
+  stroke: #8fd3e8;
+  stroke-width: 5;
 }
 
-/* 정문 */
-.map-gate rect {
-  fill: #e9eeff;
+.map-start {
+  fill: #fff;
+  stroke: var(--school-blue);
+  stroke-width: 2.5;
 }
 
+/* 정문 라벨 */
 .map-gate-label rect {
   fill: #e9eeff;
 }
@@ -143,7 +101,7 @@
 .map-label--landmark {
   font-size: 11.5px;
   font-weight: 700;
-  fill: #e3e9ff;
+  fill: #dfe6fb;
 }
 
 .map-label--context {
@@ -152,91 +110,21 @@
   fill: #8591b6;
 }
 
-/* 목적지 말풍선 */
-.map-callout path {
-  fill: #fff;
-  stroke: rgba(155, 123, 255, 0.6);
-  stroke-width: 1;
+/* 목적지 표시 */
+.map-dest__ring {
+  fill: rgba(216, 18, 71, 0.12);
+  stroke: rgba(216, 18, 71, 0.75);
+  stroke-width: 1.4;
 }
 
-.map-callout text {
-  font-size: 11px;
+.map-dest__pin {
+  fill: var(--school-red);
+}
+
+.map-dest text {
+  font-size: 11.5px;
   font-weight: 800;
-  fill: #3b2a8f;
-}
-
-/* 단계 번호 */
-.map-stop {
-  cursor: pointer;
-}
-
-.map-stop__hit {
-  fill: transparent;
-}
-
-.map-stop__inner {
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform 0.45s var(--ease-out);
-}
-
-.map-stop__inner circle {
-  fill: #0a1022;
-  stroke: rgba(233, 238, 255, 0.55);
-  stroke-width: 1.5;
-  transition:
-    fill 0.3s,
-    stroke 0.3s;
-}
-
-.map-stop__inner text {
-  font-size: 9.5px;
-  font-weight: 800;
-  fill: #e9eeff;
-}
-
-.map-stop.is-past .map-stop__inner circle {
-  fill: #12305a;
-  stroke: #2fd6f2;
-}
-
-.map-stop.is-active .map-stop__inner {
-  transform: scale(1.3);
-}
-
-.map-stop.is-active .map-stop__inner circle {
   fill: #fff;
-  stroke: #2fd6f2;
-  stroke-width: 2;
-}
-
-.map-stop.is-active .map-stop__inner text {
-  fill: #0a1022;
-}
-
-/* 걷는 점 */
-.map-walker {
-  pointer-events: none;
-}
-
-.map-walker__halo {
-  fill: rgba(47, 214, 242, 0.28);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: map-pulse 1.6s ease-in-out infinite;
-}
-
-.map-walker__dot {
-  fill: #fff;
-  stroke: #2fd6f2;
-  stroke-width: 2;
-}
-
-@keyframes map-pulse {
-  50% {
-    transform: scale(1.35);
-    opacity: 0.45;
-  }
 }
 
 /* 방위 · 축척 */
@@ -265,22 +153,4 @@
   fill: none;
   stroke: #9aa6c4;
   stroke-width: 1.2;
-}
-
-/* 터치 화면에서는 반복 애니메이션 없이: 걷는 점은 단계를 바꿀 때만 움직여요 */
-@media (hover: none), (pointer: coarse) {
-  .map-route-flow,
-  .map-dest-ring,
-  .map-walker__halo {
-    animation: none;
-  }
-
-  .map-dest-ring {
-    transform: scale(0.85);
-    opacity: 0.5;
-  }
-
-  .map-dest-ring--late {
-    display: none;
-  }
 }

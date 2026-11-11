@@ -1,5 +1,6 @@
 import { event } from "../data";
 import { Icon } from "./Icon";
+import { SchoolMark } from "./SchoolMark";
 import "./Footer.css";
 
 /** 문의처 · 주소 */
@@ -8,7 +9,8 @@ export const Footer = () => (
     <div className="container footer__inner">
       <div>
         <p className="footer__title">
-          {event.year} BRIDGE DAY
+          <SchoolMark size={26} />
+          {event.school} · {event.year} BRIDGE DAY
         </p>
         <p className="footer__text">문의사항이 있으시면 학과 사무실로 연락 주세요.</p>
       </div>

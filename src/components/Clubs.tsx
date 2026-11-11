@@ -10,7 +10,7 @@ const GemEmblem = () => (
   </svg>
 );
 
-/** 전공 동아리 */
+/** 전공 동아리: 소개 · 주요 활동 · 지도교수를 표처럼 */
 export const Clubs = () => (
   <section className="section section--alt" id="clubs" aria-labelledby="clubs-title">
     <div className="container">
@@ -23,7 +23,7 @@ export const Clubs = () => (
           <article className="club" key={club.name} aria-labelledby={`club-${i}`}>
             <header className="club__head">
               <div className="club__logo">
-                {club.logo ? <img src={club.logo} alt="" width={56} height={56} loading="lazy" /> : <GemEmblem />}
+                {club.logo ? <img src={club.logo} alt="" width={64} height={64} loading="lazy" /> : <GemEmblem />}
               </div>
               <div>
                 <h3 className="club__name" id={`club-${i}`}>
@@ -33,21 +33,26 @@ export const Clubs = () => (
               </div>
             </header>
 
-            <p className="club__purpose">{club.purpose}</p>
-
-            <div>
-              <h4 className="club__label">주요 활동</h4>
-              <ul className="club__activities">
-                {club.activities.map((activity) => (
-                  <li key={activity}>{activity}</li>
-                ))}
-              </ul>
-            </div>
-
-            <p className="club__advisors">
-              <span className="club__label">지도교수</span>
-              {club.advisors.map((name) => `${name} 교수님`).join(", ")}
-            </p>
+            <dl className="club__info">
+              <div>
+                <dt>소개</dt>
+                <dd>{club.purpose}</dd>
+              </div>
+              <div>
+                <dt>주요 활동</dt>
+                <dd>
+                  <ul className="club__activities">
+                    {club.activities.map((activity) => (
+                      <li key={activity}>{activity}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+              <div>
+                <dt>지도교수</dt>
+                <dd>{club.advisors.map((name) => `${name} 교수님`).join(", ")}</dd>
+              </div>
+            </dl>
           </article>
         ))}
       </div>

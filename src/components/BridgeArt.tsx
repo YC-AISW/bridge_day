@@ -1,4 +1,5 @@
-// 현수교 라인아트 (viewBox 1440 × 300, 움직임 없는 장식). 케이블 모양은 2차 베지어 곡선으로 계산해요.
+// 현수교 라인아트 (viewBox 1440 × 300, 움직임 없는 장식). 선 색은 CSS 의 color 를 따라가요.
+// 케이블 모양은 2차 베지어 곡선으로 계산해요.
 const DECK_Y = 268;
 const TOWERS = [420, 1020];
 const TOP_Y = 70;
@@ -31,18 +32,17 @@ const towerPath = TOWERS.map(
     `M${x - 12} 128H${x + 12}M${x - 13} 196H${x + 13}M${x - 11} ${TOP_Y - 14}H${x + 11}`
 ).join("");
 
-/** Hero 아래쪽에 깔리는 다리 그림 */
-export const BridgeArt = () => (
-  <svg className="bridge" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="bridge-stroke" x1="0" x2="1440" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#5b8cff" />
-        <stop offset="0.5" stopColor="#2fd6f2" />
-        <stop offset="1" stopColor="#5b8cff" />
-      </linearGradient>
-    </defs>
-    <g fill="none" stroke="url(#bridge-stroke)" strokeLinecap="round">
-      <path d={hangerPath} strokeWidth="1" opacity="0.45" />
+/** 다리 그림 (장식) */
+export const BridgeArt = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    viewBox="0 0 1440 300"
+    preserveAspectRatio="xMidYMax slice"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <g fill="none" stroke="currentColor" strokeLinecap="round">
+      <path d={hangerPath} strokeWidth="1" opacity="0.5" />
       <path d={[LEFT, MAIN, RIGHT].map(curvePath).join("")} strokeWidth="2.2" />
       <path d={towerPath} strokeWidth="3" />
       <path d={`M0 ${DECK_Y}H1440`} strokeWidth="3.2" />

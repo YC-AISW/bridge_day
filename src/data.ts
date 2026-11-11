@@ -1,14 +1,6 @@
 // ===== 2026 BRIDGE DAY 페이지 내용 =====
 // 행사 정보가 바뀌면 이 파일만 고치면 됩니다. (화면 코드는 건드리지 않아도 돼요)
 
-import gatePhoto from "./assets/campus/gate.webp";
-import gateThumb from "./assets/campus/gate-thumb.webp";
-import gymPhoto from "./assets/campus/gym.webp";
-import gymThumb from "./assets/campus/gym-thumb.webp";
-import industryPhoto from "./assets/campus/industry.webp";
-import industryThumb from "./assets/campus/industry-thumb.webp";
-import miraePhoto from "./assets/campus/mirae.webp";
-import miraeThumb from "./assets/campus/mirae-thumb.webp";
 import techusLogo from "./assets/clubs/techus.jpg";
 
 // ===== 행사 기본 정보 =====
@@ -193,67 +185,3 @@ export const clubs: Club[] = [
     advisors: ["이덕기", "변유찬"],
   },
 ];
-
-// ===== 찾아오는 길: 정문 → AI·DX 센터 =====
-// stop 은 src/campusMap.ts 의 안내 지점 id 와 같아야 해요 (지도의 번호와 연결됩니다).
-export type RouteStep = {
-  stop: "gate" | "mirae" | "gym" | "industry" | "arrive";
-  title: string;
-  text: string;
-  photo?: { src: string; thumb: string; alt: string };
-};
-
-export const routeSteps: RouteStep[] = [
-  {
-    stop: "gate",
-    title: "정문으로 들어와요",
-    text: "정문을 지나 학교 안쪽으로 쭉 뻗은 오르막길을 따라 직진해요.",
-    photo: { src: gatePhoto, thumb: gateThumb, alt: "연암공과대학교 정문과 학교 안쪽으로 이어지는 오르막길" },
-  },
-  {
-    stop: "mirae",
-    title: "연암미래관 앞에서 오른쪽",
-    text: "오른쪽 잔디밭 너머로 유리 외벽의 연암미래관이 보이면, 바로 앞 갈림길에서 오른쪽 길로 들어가요.",
-    photo: { src: miraePhoto, thumb: miraeThumb, alt: "흰 패널과 유리 외벽의 연암미래관" },
-  },
-  {
-    stop: "gym",
-    title: "체육관(인화관) 앞에서 왼쪽",
-    text: "농구장을 오른쪽에 두고 길을 따라가면 붉은 벽돌의 체육관(인화관)이 나와요. 체육관 앞에서 왼쪽으로 꺾어요.",
-    photo: { src: gymPhoto, thumb: gymThumb, alt: "붉은 벽돌 건물인 인화관(체육관) 정면" },
-  },
-  {
-    stop: "industry",
-    title: "산학협동관을 지나 직진",
-    text: "오른쪽에 산학협동관이 보이면 그대로 조금만 더 걸어요.",
-    photo: { src: industryPhoto, thumb: industryThumb, alt: "산학협동관 현판이 걸린 붉은 벽돌 건물" },
-  },
-  {
-    stop: "arrive",
-    title: "AI·DX 센터 도착!",
-    text: "산학협동관 바로 다음 건물이 AI·DX 센터예요. 행사장은 1층입니다.",
-  },
-];
-
-// ===== 학교까지 오는 법 =====
-// 연암공과대학교 홈페이지 학교위치/교통(https://www.yc.ac.kr/www/campus-info.do) 안내를 옮겨 왔어요.
-export const transit = [
-  {
-    from: "진주역",
-    taxi: "약 7분",
-    bus: "진주역 앞에서 131번 → 가좌주공아파트(연암공과대학교) 하차 후 도보 10분",
-  },
-  {
-    from: "진주 고속버스터미널",
-    taxi: "약 8분",
-    bus: "터미널 서쪽 제일병원 앞에서 132 · 121 · 21 · 27번 → 연암공과대학교 하차 후 도보 10분",
-  },
-  {
-    from: "진주 시외버스터미널",
-    taxi: "약 11분",
-    bus: "농협중앙지점 정류장에서 130 · 131 · 132 · 133 · 140 · 141 · 142 · 143 · 144 · 145 · 171 · 380 · 381 · 382 · 383 · 390번 → 연암공과대학교 하차 후 도보 10분",
-  },
-];
-
-/** 정문 좌표 (카카오맵 길찾기 도착지) */
-export const gateLocation = { name: "연암공과대학교 정문", lat: 35.1641, lng: 128.1027 };
