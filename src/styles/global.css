@@ -1,48 +1,42 @@
 /* =========================================================
    2026 BRIDGE DAY — 전역 스타일
-   디자인 토큰 · 리셋 · 공통 레이아웃 · 버튼 · 등장 애니메이션
+   정보가 먼저 읽히도록: 강조색 하나, 평평한 카드, 큰 글자 대비
    ========================================================= */
 
 :root {
   color-scheme: dark;
 
   /* 배경 · 면 */
-  --bg: #060915;
-  --bg-2: #0a1022;
-  --surface: rgba(255, 255, 255, 0.035);
-  --surface-2: rgba(255, 255, 255, 0.065);
+  --bg: #0a0f1d;
+  --bg-2: #0e1427;
+  --surface: #131b31;
+  --surface-2: #1a243f;
   --line: rgba(255, 255, 255, 0.08);
-  --line-2: rgba(255, 255, 255, 0.16);
+  --line-2: rgba(255, 255, 255, 0.14);
 
   /* 글자 */
-  --text: #eef2ff;
-  --text-2: #b6c0da;
-  --text-3: #7f8aab;
+  --text: #eef2fb;
+  --text-2: #b7c0d6;
+  --text-3: #8892ad;
 
-  /* 포인트 색 */
-  --blue: #5b8cff;
-  --cyan: #2fd6f2;
-  --mint: #62f2c4;
-  --violet: #9b7bff;
-  --pink: #ff7ac6;
+  /* 강조색 */
+  --accent: #5b8cff;
+  --accent-2: #2fd6f2;
+  --accent-soft: rgba(91, 140, 255, 0.13);
   --amber: #ffcf5c;
-  --grad: linear-gradient(100deg, var(--blue) 0%, var(--cyan) 52%, var(--mint) 100%);
-  --grad-violet: linear-gradient(120deg, var(--violet), var(--pink));
+  --grad: linear-gradient(100deg, var(--accent), var(--accent-2));
 
   /* 글꼴 */
   --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo",
     "Malgun Gothic", sans-serif;
   --font-display: "Unbounded Variable", "Pretendard Variable", Pretendard, sans-serif;
 
-  /* 크기 · 움직임 */
+  /* 크기 */
   --gutter: clamp(16px, 4.5vw, 40px);
-  --maxw: 1160px;
-  --radius-lg: 28px;
-  --radius: 20px;
-  --radius-sm: 12px;
+  --maxw: 1080px;
+  --radius: 16px;
+  --radius-sm: 10px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --nav-h: 64px;
 }
 
 /* ---------- 리셋 ---------- */
@@ -75,12 +69,10 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 img,
-svg,
-video {
+svg {
   display: block;
   max-width: 100%;
 }
@@ -89,13 +81,9 @@ img {
   height: auto;
 }
 
-button,
-input {
+button {
   font: inherit;
   color: inherit;
-}
-
-button {
   background: none;
   border: 0;
   cursor: pointer;
@@ -115,12 +103,8 @@ h1,
 h2,
 h3,
 h4 {
-  line-height: 1.2;
+  line-height: 1.25;
   text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
 }
 
 strong {
@@ -129,41 +113,14 @@ strong {
 }
 
 ::selection {
-  background: rgba(47, 214, 242, 0.35);
+  background: rgba(91, 140, 255, 0.4);
   color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--accent-2);
   outline-offset: 3px;
   border-radius: 6px;
-}
-
-/* 고정 배경: 은은한 그리드 + 노이즈 */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(1100px 700px at 85% -10%, rgba(91, 140, 255, 0.12), transparent 60%),
-    radial-gradient(900px 600px at -10% 40%, rgba(155, 123, 255, 0.08), transparent 60%),
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px) 0 0 / 56px 56px,
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px) 0 0 / 56px 56px;
-}
-
-/* 필름 질감(노이즈)은 화면 전체를 덮는 층이라 마우스를 쓰는 큰 화면에서만 */
-@media (hover: hover) and (pointer: fine) {
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    pointer-events: none;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
 }
 
 /* ---------- 레이아웃 ---------- */
@@ -173,21 +130,13 @@ body::before {
 }
 
 .section {
-  position: relative;
-  padding-block: clamp(96px, 13vw, 168px);
-  scroll-margin-top: 24px;
+  padding-block: clamp(56px, 7vw, 88px);
+  scroll-margin-top: 16px;
 }
 
-/* 화면 맨 위 스크롤 진행 막대 */
-.scroll-progress {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 150;
-  height: 3px;
-  background: var(--grad);
-  transform-origin: 0 50%;
-  transform: scaleX(0);
-  box-shadow: 0 0 12px rgba(47, 214, 242, 0.6);
+.section--alt {
+  background: var(--bg-2);
+  border-block: 1px solid var(--line);
 }
 
 .skip-link {
@@ -201,7 +150,6 @@ body::before {
   color: var(--bg);
   font-weight: 700;
   transform: translateY(-150%);
-  transition: transform 0.3s var(--ease-out);
 }
 
 .skip-link:focus-visible {
@@ -220,153 +168,61 @@ body::before {
 /* ---------- 섹션 제목 ---------- */
 .section-head {
   display: grid;
-  gap: 18px;
-  max-width: 760px;
-  margin-bottom: clamp(48px, 7vw, 80px);
-}
-
-.section-head--center {
-  margin-inline: auto;
-  text-align: center;
-  justify-items: center;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
   gap: 10px;
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--cyan);
-}
-
-.eyebrow::before {
-  content: "";
-  width: 28px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--grad);
+  max-width: 680px;
+  margin-bottom: clamp(28px, 4vw, 40px);
 }
 
 .section-title {
-  font-size: clamp(30px, 5.4vw, 54px);
+  font-size: clamp(26px, 4vw, 34px);
   font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.18;
-}
-
-.section-title em {
-  font-style: normal;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  letter-spacing: -0.03em;
 }
 
 .section-lead {
-  font-size: clamp(16px, 1.9vw, 18px);
+  font-size: clamp(15px, 1.8vw, 17px);
   color: var(--text-2);
-  max-width: 620px;
 }
 
 /* ---------- 버튼 ---------- */
 .btn {
-  --btn-bg: var(--surface-2);
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 52px;
-  padding: 0 24px;
-  border-radius: 999px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  background: var(--btn-bg);
+  background: var(--surface-2);
   border: 1px solid var(--line-2);
   transition:
-    transform 0.35s var(--ease-spring),
-    background-color 0.3s,
-    border-color 0.3s,
-    box-shadow 0.3s;
+    background-color 0.2s,
+    border-color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-.btn:active {
-  transform: translateY(0) scale(0.98);
-}
-
-.btn svg {
-  transition: transform 0.35s var(--ease-out);
-}
-
-.btn:hover svg {
-  transform: translateX(3px);
-}
-
 .btn--primary {
-  color: #04111f;
+  color: #fff;
+  background: var(--accent);
   border-color: transparent;
-  background: var(--grad);
-  background-size: 160% 100%;
-  box-shadow:
-    0 10px 32px -8px rgba(47, 214, 242, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .btn--primary:hover {
-  background-position: 100% 0;
+  background: #4a7cf0;
   border-color: transparent;
-  box-shadow:
-    0 14px 40px -8px rgba(47, 214, 242, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-.btn--ghost {
-  background: rgba(16, 23, 46, 0.72);
 }
 
 .btn--small {
   min-height: 40px;
-  padding: 0 16px;
+  padding: 0 14px;
   font-size: 14px;
-}
-
-/* ---------- 칩 ---------- */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-2);
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  white-space: nowrap;
-}
-
-/* ---------- 회전하는 그라디언트 테두리용 각도 ---------- */
-@property --angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@keyframes spin-angle {
-  to {
-    --angle: 360deg;
-  }
+  border-radius: 10px;
 }
 
 /* ---------- 화면 밖 애니메이션 멈춤 ----------
@@ -376,22 +232,6 @@ body::before {
 [data-paused="true"] *::before,
 [data-paused="true"] *::after {
   animation-play-state: paused !important;
-}
-
-/* ---------- 등장 애니메이션 ----------
-   translate3d 는 요소마다 GPU 층을 만들어 휴대폰 메모리를 많이 써요. 2D translate 로 충분해요. */
-.reveal {
-  opacity: 0;
-  transform: translate(0, 32px);
-  transition:
-    opacity 0.9s var(--ease-out),
-    transform 0.9s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 90ms);
-}
-
-.reveal.is-in {
-  opacity: 1;
-  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -405,11 +245,5 @@ body::before {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
   }
 }

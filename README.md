@@ -61,7 +61,7 @@ npm run preview
 | 날짜 · 시간 · 장소 · 문의 전화 | `event` — 날짜를 `"2026-12-05"`처럼 넣으면 요일과 D-day가 자동으로 붙습니다. |
 | 행사 특징 카드 | `features` |
 | 타임테이블 | `timeline` — 진행 시간(분)은 시작·끝 시각으로 자동 계산됩니다. |
-| 멘토 | `mentors` — 기술 스택 색은 `src/components/Mentors.tsx`의 `STACK_COLORS` |
+| 멘토 | `mentors` — 비워 둔 항목은 "소개 준비 중"으로 표시됩니다. |
 | 전공 동아리 | `clubs` — [학과 홈페이지 전공동아리](https://www.yc.ac.kr/smartsw/major-clubs.do) 기준 |
 | 길 안내 문구 · 사진 | `routeSteps` |
 | 버스 · 택시 안내 | `transit` — [학교위치/교통](https://www.yc.ac.kr/www/campus-info.do) 기준 |
@@ -89,15 +89,15 @@ npm run preview
 | :---: | :---: | :---: |
 | <img src="./docs/screenshots/mobile-hero.jpg" width="240" alt="모바일 첫 화면" /> | <img src="./docs/screenshots/mobile-schedule.jpg" width="240" alt="모바일 타임테이블" /> | <img src="./docs/screenshots/mobile-directions.jpg" width="240" alt="모바일 찾아오는 길 지도" /> |
 
-### About The Event
+### 행사 소개
 
 <p align="center"><img src="./docs/screenshots/desktop-about.jpg" width="760" alt="행사 소개" /></p>
 
-### Time Table
+### 일정
 
 <p align="center"><img src="./docs/screenshots/desktop-schedule.jpg" width="760" alt="타임테이블" /></p>
 
-### Meet Your Mentors
+### 멘토 소개
 
 <p align="center"><img src="./docs/screenshots/desktop-mentors.jpg" width="760" alt="멘토 소개" /></p>
 
@@ -105,7 +105,7 @@ npm run preview
 
 <p align="center"><img src="./docs/screenshots/desktop-clubs.jpg" width="760" alt="동아리 소개" /></p>
 
-### 찾아오는 길
+### 오시는 길
 
 <p align="center"><img src="./docs/screenshots/desktop-directions.jpg" width="760" alt="정문에서 AI·DX 센터까지 길 안내" /></p>
 
@@ -115,13 +115,11 @@ npm run preview
 
 - React 18 · TypeScript · Vite 5
 - 순수 CSS (CSS 프레임워크 · 애니메이션 라이브러리 없음)
-- 글꼴: Pretendard(본문), Unbounded(영문 제목) — npm 패키지로 함께 배포
+- 글꼴: Pretendard(본문), Unbounded(`BRIDGE DAY` 제목) — npm 패키지로 함께 배포
 
-### 사용한 퍼블리싱 기법
+### 디자인 원칙
 
-- **첫 화면:** SVG 현수교 라인 드로잉(`stroke-dashoffset`), 글자별 등장 애니메이션, 오로라 그라디언트, 별빛, 물에 비친 다리
-- **스크롤 연출:** 스크롤 진행 막대, 현재 섹션을 따라 움직이는 메뉴 표시, 스크롤에 따라 채워지는 타임라인, 섹션 등장 효과
-- **카드:** 마우스를 따라오는 스포트라이트(CSS 변수 + mask), `@property`로 회전하는 그라디언트 테두리, 멘토 카드 3D 기울이기 + 홀로그램 반사
-- **찾아오는 길:** 스크롤텔링(지도 고정 + 단계 강조), SVG 경로 진행 애니메이션, "길 따라가기" 재생
-- **기타:** 숫자 굴리기 카운터, 무한 흐르는 띠, 카카오톡 링크 미리보기(OG) 이미지
+- **정보 전달이 먼저:** 일시 · 장소는 첫 화면에 표로, 일정은 시간 | 내용 목록으로 보여 줍니다. 강조색은 하나만 씁니다.
+- **움직임은 길 안내에만:** 찾아오는 길 지도에서 경로가 그려지고 걷는 점이 단계별로 이동합니다. 넓은 화면에서는 지도가 고정되고, 스크롤하면 해당 단계가 지도에 표시됩니다.
+- **휴대폰 성능:** 계속 도는 애니메이션 · 블러 · 블렌드 효과를 쓰지 않습니다. 지도 안의 반복 애니메이션은 마우스를 쓰는 화면에서만 켜고, 화면 밖에서는 멈춥니다(`data-anim` + `usePauseOffscreen`).
 - **접근성:** 본문 바로가기, 키보드 포커스 표시, 지도 대체 텍스트, `prefers-reduced-motion`(동작 줄이기) 대응

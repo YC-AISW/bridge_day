@@ -177,7 +177,7 @@
 .map-stop__inner {
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 0.45s var(--ease-spring);
+  transition: transform 0.45s var(--ease-out);
 }
 
 .map-stop__inner circle {

@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { route, stops } from "../campusMap";
 import { event, gateLocation, routeSteps, transit } from "../data";
 import { useMediaQuery } from "../hooks/useMediaQuery";
-import { cssVars } from "../lib/cssVars";
 import { aboutMeters, walkMinutes } from "../lib/format";
 import { CampusMap, type CampusMapHandle } from "./CampusMap";
 import { Icon } from "./Icon";
@@ -36,12 +35,12 @@ const GettingHere = () => {
   };
 
   return (
-    <div className="getting-here reveal">
+    <div className="getting-here">
       <div className="getting-here__intro">
-        <p className="getting-here__eyebrow">
+        <h3 className="getting-here__title">
           <Icon name="map" size={18} />
           학교까지 오는 법
-        </p>
+        </h3>
         <p className="getting-here__address">
           {event.address}
           <span>
@@ -103,11 +102,11 @@ export const Directions = () => {
   const last = routeSteps.length - 1;
 
   const select = useCallback(
-    (index: number, reveal = false) => {
+    (index: number, showMap = false) => {
       mapRef.current?.stop();
       setActive(Math.min(last, Math.max(0, index)));
       // 좁은 화면에서는 지도가 위에 있으니, 단계를 누르면 지도로 올려 보여 줘요.
-      if (reveal && !isWide) mapCardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (showMap && !isWide) mapCardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     },
     [isWide, last]
   );
@@ -149,41 +148,16 @@ export const Directions = () => {
   return (
     <section className="section directions" id="directions" aria-labelledby="directions-title">
       <div className="container">
-        <SectionHead
-          id="directions-title"
-          eyebrow="Directions"
-          title={
-            <>
-              정문에서
-              <br />
-              <em>AI·DX 센터</em>까지
-            </>
-          }
-        >
+        <SectionHead id="directions-title" title="오시는 길">
           <p>
-            정문부터 행사장까지 {aboutMeters(route.length)}, 걸어서 {walkMinutes(route.length)}분 정도예요. 지도와 사진을
-            따라 천천히 오세요!
+            정문에서 행사장(<strong>{event.venue}</strong>)까지 {aboutMeters(route.length)}, 걸어서 {walkMinutes(route.length)}분
+            정도예요.
           </p>
         </SectionHead>
 
-        <ul className="directions__summary reveal">
-          <li className="chip">
-            <Icon name="pin" size={16} />
-            {event.venue}
-          </li>
-          <li className="chip">
-            <Icon name="walk" size={16} />
-            도보 약 {walkMinutes(route.length)}분
-          </li>
-          <li className="chip">
-            <Icon name="route" size={16} />
-            {aboutMeters(route.length)}
-          </li>
-        </ul>
-
         <div className="directions__layout">
           <div className="directions__map-col">
-            <div className="map-card reveal" ref={mapCardRef} data-anim>
+            <div className="map-card" ref={mapCardRef} data-anim>
               <p className="map-card__caption" aria-live="polite">
                 <span className="map-card__num">{active + 1}</span>
                 {routeSteps[active].title}
@@ -220,10 +194,8 @@ export const Directions = () => {
                 ref={(el) => {
                   stepRefs.current[i] = el;
                 }}
-                // 상태는 data-state 로: className 을 바꾸면 등장 효과(is-in)가 지워져요.
-                className={`route-step reveal${step.photo ? "" : " route-step--arrive"}`}
+                className={`route-step${step.photo ? "" : " route-step--arrive"}`}
                 data-state={i === active ? "active" : i < active ? "past" : "next"}
-                style={cssVars({ "--i": i % 2 })}
                 onClick={() => select(i, true)}
               >
                 <button

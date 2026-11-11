@@ -39,22 +39,22 @@ export type Feature = {
 export const features: Feature[] = [
   {
     key: "network",
-    title: "Networking",
+    title: "네트워킹",
     description: "합격자 동기들, 그리고 선배들과 미리 친해질 수 있는 기회",
   },
   {
     key: "lunch",
-    title: "Lunch & Gift",
+    title: "점심 & 기념품",
     description: "맛있는 점심식사와 기념품 제공",
   },
   {
     key: "mentor",
-    title: "Mentoring",
+    title: "멘토링",
     description: "우수 선배들의 포트폴리오 발표와 현실적인 조언",
   },
   {
     key: "experience",
-    title: "Experience",
+    title: "체험",
     description: "AI·DX 센터와 선배들이 직접 만든 프로젝트 체험",
   },
 ];
@@ -127,7 +127,7 @@ export const timeline: TimelineItem[] = [
 // ===== 멘토 (포트폴리오 발표 선배) =====
 // - grade    : 학년 (예: "3학년")
 // - interest : 관심 분야. 비워 두면 "소개 준비 중"으로 표시돼요.
-// - stacks   : 기술 스택 이름. 색상은 components/Mentors.tsx 의 STACK_COLORS 에서 정해요.
+// - stacks   : 기술 스택 이름 (비워 두면 표시하지 않아요)
 export type Mentor = {
   name: string;
   grade: string;
@@ -165,11 +165,9 @@ export type Club = {
   subtitle: string;
   purpose: string;
   activities: string[];
-  tags: string[];
   advisors: string[];
   /** 로고 이미지 (없으면 기본 엠블럼) */
   logo?: string;
-  theme: "techus" | "sapphire";
 };
 
 export const clubs: Club[] = [
@@ -181,10 +179,8 @@ export const clubs: Club[] = [
       "주로 팀 프로젝트를 진행하며, 취업에 실질적으로 도움이 되는 활동을 합니다.",
       "각종 경진대회와 해커톤에 참여하고, 선후배가 다 같이 어울리며 활동합니다.",
     ],
-    tags: ["팀 프로젝트", "해커톤", "경진대회"],
     advisors: ["김범준", "이승익", "김영수", "이재범"],
     logo: techusLogo,
-    theme: "techus",
   },
   {
     name: "Sapphire",
@@ -194,9 +190,7 @@ export const clubs: Club[] = [
       "ERPSIM, SAP 스터디, ABAP 프로젝트, 자격증 스터디를 주로 진행합니다.",
       "학기 말에는 프로젝트로 전공동아리 공모전이나 경진대회에 참여합니다.",
     ],
-    tags: ["SAP", "ERPSIM", "ABAP", "자격증"],
     advisors: ["이덕기", "변유찬"],
-    theme: "sapphire",
   },
 ];
 

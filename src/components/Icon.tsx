@@ -49,12 +49,6 @@ const ICONS = {
       <path d="M19 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" />
     </>
   ),
-  coffee: (
-    <>
-      <path d="M4 8.5h13v5.5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10.5h1.5a2.5 2.5 0 0 1 0 5H17" />
-      <path d="M8 2.5v3M12 2.5v3" />
-    </>
-  ),
   check: <path d="M4.5 12.5l5 5 10-11" />,
   copy: (
     <>
@@ -78,39 +72,13 @@ const ICONS = {
       <circle cx="16" cy="14.7" r=".8" fill="currentColor" />
     </>
   ),
-  walk: (
-    <>
-      <circle cx="13.5" cy="4" r="2" />
-      <path d="M9.5 21l2.2-6.2 2.8 2.7V21M11.7 14.8l1.2-5.6-3.3 1.6L8 14M12.9 9.2l2.4 2.6 3.2.7" />
-    </>
-  ),
-  route: (
-    <>
-      <circle cx="6" cy="18" r="2.5" />
-      <circle cx="18" cy="6" r="2.5" />
-      <path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5" />
-    </>
-  ),
   map: <path d="M9 4.5 3.5 6.8v13l5.5-2.3 6 2.5 5.5-2.3v-13L15 7 9 4.5zM9 4.5v13M15 7v13" />,
   phone: (
     <path d="M5.2 3.5h3.3l1.6 4.4-2.1 1.4a12 12 0 0 0 6.7 6.7l1.4-2.1 4.4 1.6v3.3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.2 5.7a2 2 0 0 1 2-2.2z" />
   ),
   play: <path d="M7.5 4.8v14.4a1 1 0 0 0 1.5.9l11.4-7.2a1 1 0 0 0 0-1.8L9 3.9a1 1 0 0 0-1.5.9z" fill="currentColor" stroke="none" />,
-  star: <path d="M12 1.5c.7 5.6 3.6 8.6 9.2 9.3-5.6.7-8.5 3.7-9.2 9.3-.7-5.6-3.6-8.6-9.2-9.3C8.4 10.1 11.3 7.1 12 1.5z" fill="currentColor" stroke="none" />,
   code: <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16" />,
   flag: <path d="M5.5 21V4M5.5 4.5h11.5l-2.3 4.2 2.3 4.3H5.5" />,
-  building: (
-    <>
-      <rect x="4.5" y="3" width="15" height="18" rx="2" />
-      <path d="M9 7.5h1.5M13.5 7.5H15M9 11.5h1.5M13.5 11.5H15M10.5 21v-4h3v4" />
-    </>
-  ),
-  graduation: (
-    <>
-      <path d="M2.5 9.5 12 5l9.5 4.5L12 14z" />
-      <path d="M6.5 11.5v4.3c0 1.2 2.5 2.7 5.5 2.7s5.5-1.5 5.5-2.7v-4.3M21.5 9.5V15" />
-    </>
-  ),
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof ICONS;

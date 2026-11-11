@@ -1,338 +1,104 @@
-/* ===== Time Table ===== */
-.timeline {
-  --time-w: 132px;
-  --rail-w: 48px;
-  --rail-x: calc(var(--time-w) + var(--rail-w) / 2);
-  position: relative;
-  max-width: 920px;
-  margin-inline: auto;
+/* ===== 일정 ===== */
+.schedule {
+  border-top: 1px solid var(--line-2);
 }
 
-.timeline__list {
+.schedule__item {
   display: grid;
-  gap: 14px;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--line);
 }
 
-/* 세로선 (바탕 + 스크롤에 따라 채워지는 선, 채우기는 JS 가 transform 으로) */
-.timeline__rail,
-.timeline__fill {
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: calc(var(--rail-x) - 1px);
-  width: 2px;
-  border-radius: 2px;
-}
-
-.timeline__rail {
-  background: var(--line-2);
-}
-
-.timeline__fill {
-  background: linear-gradient(to bottom, var(--blue), var(--cyan) 60%, var(--violet));
-  box-shadow: 0 0 14px rgba(47, 214, 242, 0.7);
-  transform-origin: top;
-  transform: scaleY(0);
-}
-
-.slot {
-  position: relative;
-  display: grid;
-  grid-template-columns: var(--time-w) var(--rail-w) 1fr;
-  grid-template-areas: "time dot card";
-  align-items: start;
-}
-
-/* --- 시간 --- */
-.slot__time {
-  grid-area: time;
-  display: grid;
-  justify-items: end;
-  padding-top: 18px;
-  font-family: var(--font-display);
-  line-height: 1.15;
-}
-
-.slot__time time {
-  font-size: 22px;
+.schedule__time {
+  font-size: 16px;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   color: var(--text-2);
-  transition: color 0.4s;
+  white-space: nowrap;
 }
 
-.slot__time span {
-  margin-top: 6px;
-  font-size: 12px;
+.schedule__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.schedule__duration {
+  font-size: 13px;
+  font-weight: 600;
   color: var(--text-3);
 }
 
-.slot.is-past .slot__time time {
-  color: var(--text);
-}
-
-/* --- 점 --- */
-.slot__dot {
-  grid-area: dot;
-  justify-self: center;
-  display: grid;
-  place-items: center;
-  width: 16px;
-  height: 16px;
-  margin-top: 22px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--line-2);
-  color: transparent;
-  z-index: 1;
-  transition:
-    background 0.4s,
-    border-color 0.4s,
-    box-shadow 0.4s,
-    transform 0.5s var(--ease-spring);
-}
-
-.slot.is-past .slot__dot {
-  border-color: transparent;
-  background: var(--cyan);
-  box-shadow:
-    0 0 0 5px rgba(47, 214, 242, 0.15),
-    0 0 18px rgba(47, 214, 242, 0.8);
-}
-
-.slot--highlight .slot__dot {
-  width: 26px;
-  height: 26px;
-  margin-top: 17px;
-}
-
-.slot--highlight.is-past .slot__dot {
-  background: var(--grad);
-  color: #04111f;
-  transform: rotate(360deg);
-}
-
-/* --- 카드 --- */
-.slot__card {
-  grid-area: card;
-  position: relative;
-  padding: 18px 22px 20px;
-  border-radius: var(--radius);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  transition:
-    background 0.4s,
-    border-color 0.4s;
-}
-
-.slot__card:hover {
-  background: var(--surface-2);
-  border-color: var(--line-2);
-}
-
-.slot__head {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 10px;
-}
-
-.slot__title {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.slot__duration {
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--cyan);
-  background: rgba(47, 214, 242, 0.1);
-  border: 1px solid rgba(47, 214, 242, 0.22);
-}
-
-.slot__text {
-  margin-top: 6px;
+.schedule__text {
+  margin-top: 2px;
   font-size: 15px;
   color: var(--text-2);
+}
+
+.schedule__extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.schedule__extra span {
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.schedule__details {
+  display: grid;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.schedule__details li::before {
+  content: "· ";
+  color: var(--accent);
+}
+
+/* 주요 프로그램: 강조색 띠 */
+.schedule__item--highlight {
+  margin-block: 6px;
+  border-radius: 12px;
+  border-bottom-color: transparent;
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.schedule__item--highlight .schedule__time {
+  color: var(--accent-2);
 }
 
 /* 휴식 */
-.slot--break .slot__card {
-  background: transparent;
-  border-style: dashed;
-}
-
-.slot--break .slot__title {
-  font-size: 16px;
+.schedule__item--break .schedule__title {
+  font-weight: 600;
   color: var(--text-2);
 }
 
-.slot__break-icon {
-  color: var(--amber);
+.schedule__item--break .schedule__time {
+  color: var(--text-3);
 }
 
-.slot--break .slot__duration {
-  color: var(--amber);
-  background: rgba(255, 207, 92, 0.08);
-  border-color: rgba(255, 207, 92, 0.22);
-}
-
-/* 주요 프로그램: 회전하는 그라디언트 테두리 */
-.slot--highlight .slot__card {
-  padding: 24px 26px 26px;
-  background:
-    radial-gradient(120% 140% at 0% 0%, rgba(91, 140, 255, 0.16), transparent 55%),
-    radial-gradient(100% 120% at 100% 100%, rgba(155, 123, 255, 0.14), transparent 60%),
-    rgba(10, 16, 34, 0.85);
-  border-color: transparent;
-}
-
-.slot--highlight .slot__card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1.5px;
-  border-radius: inherit;
-  background: conic-gradient(from var(--angle), var(--blue), var(--cyan), var(--mint), var(--violet), var(--blue));
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .slot--highlight .slot__card:hover::before {
-    animation: spin-angle 4s linear infinite;
-  }
-}
-
-.slot--highlight .slot__title {
-  font-size: clamp(19px, 2.4vw, 22px);
-}
-
-.slot--highlight .slot__text {
-  font-size: 16px;
-}
-
-/* 발표 선배 */
-.slot__mentors {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.slot__mentors li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 14px 5px 5px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--line-2);
-}
-
-.slot__avatar {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: #04111f;
-  background: var(--grad);
-}
-
-.slot__mentors li:nth-child(2) .slot__avatar {
-  background: var(--grad-violet);
-}
-
-.slot__mentors li:nth-child(3) .slot__avatar {
-  background: linear-gradient(120deg, var(--mint), var(--amber));
-}
-
-/* 세부 체험 */
-.slot__details {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.slot__details li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--line-2);
-}
-
-.slot__details svg {
-  flex-shrink: 0;
-  color: var(--violet);
-}
-
-/* 모바일: 시간은 카드 위로 */
-@media (max-width: 759px) {
-  .timeline {
-    --rail-w: 30px;
-    --rail-x: 15px;
-  }
-
-  .timeline__list {
-    gap: 22px;
-  }
-
-  .slot {
-    grid-template-columns: var(--rail-w) 1fr;
-    grid-template-areas:
-      "dot time"
-      "dot card";
-    column-gap: 10px;
-  }
-
-  .slot__time {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    justify-items: start;
-    padding: 0 0 8px;
-  }
-
-  .slot__time time {
-    font-size: 17px;
-  }
-
-  .slot__time span {
-    margin: 0;
-  }
-
-  .slot__dot {
-    margin-top: 2px;
-  }
-
-  .slot--highlight .slot__dot {
-    margin-top: -3px;
-  }
-
-  .slot__card,
-  .slot--highlight .slot__card {
-    padding: 16px 18px 18px;
-  }
-
-  .slot__details {
+@media (max-width: 639px) {
+  .schedule__item {
     grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 16px 12px;
+  }
+
+  .schedule__time {
+    font-size: 14px;
+    color: var(--accent-2);
   }
 }

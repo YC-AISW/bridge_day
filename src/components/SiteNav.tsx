@@ -65,7 +65,6 @@ export const SiteNav = () => {
   return (
     <nav className={`site-nav${visible ? " is-visible" : ""}`} aria-label="섹션 바로가기">
       <a className="site-nav__logo" href="#top">
-        <span className="site-nav__mark" aria-hidden="true" />
         BRIDGE DAY
       </a>
       <ul className="site-nav__list" ref={listRef}>

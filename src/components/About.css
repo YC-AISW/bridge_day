@@ -1,212 +1,49 @@
-/* ===== About ===== */
-
-/* --- 숫자 통계 --- */
-.about__stats {
+/* ===== 행사 소개 ===== */
+.features {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  margin-bottom: clamp(40px, 6vw, 64px);
 }
 
-.about__stat {
-  padding: clamp(18px, 3vw, 28px);
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
-  border: 1px solid var(--line);
-}
-
-.about__stat-value {
+.feature {
   display: flex;
-  align-items: baseline;
-  gap: 4px;
-  font-family: var(--font-display);
-  font-size: clamp(38px, 7vw, 72px);
-  font-weight: 700;
-  line-height: 1;
-}
-
-.about__stat-value .roll__strip span,
-.about__stat-value > span:not(.sr-only):not(.about__stat-unit):not(.roll) {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.about__stat-unit {
-  font-family: var(--font);
-  font-size: clamp(16px, 2.2vw, 22px);
-  font-weight: 700;
-  color: var(--text-2);
-}
-
-.about__stat-label {
-  margin-top: 10px;
-  font-size: clamp(13px, 1.6vw, 15px);
-  color: var(--text-3);
-}
-
-/* 숫자 굴리기 */
-.roll {
-  display: inline-block;
-  height: 1em;
-  overflow: hidden;
-  line-height: 1;
-}
-
-.roll__strip {
-  display: grid;
-  transition: transform 1.6s var(--ease-out) 0.25s;
-}
-
-.roll__strip span {
-  height: 1em;
-}
-
-.is-in .roll__strip {
-  transform: translateY(calc(var(--n) * -1em));
-}
-
-/* --- 벤토 카드 --- */
-.bento {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  align-items: flex-start;
   gap: 14px;
-}
-
-.bento__card {
-  --accent: var(--cyan);
-  position: relative;
-  display: grid;
-  align-content: start;
-  gap: 10px;
-  min-height: 230px;
-  padding: clamp(24px, 3vw, 34px);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015) 60%);
+  padding: 18px 20px;
+  border-radius: var(--radius);
+  background: var(--surface);
   border: 1px solid var(--line);
-  overflow: hidden;
-  isolation: isolate;
 }
 
-.bento__card--network {
-  grid-column: span 2;
-  --accent: var(--blue);
-}
-.bento__card--lunch {
-  --accent: var(--amber);
-}
-.bento__card--mentor {
-  --accent: var(--mint);
-}
-.bento__card--experience {
-  grid-column: span 2;
-  --accent: var(--violet);
-}
-
-/* 마우스를 따라오는 빛 (배경 + 테두리) */
-.bento__card::before,
-.bento__card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.bento__card::before {
-  z-index: -1;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 45%);
-}
-
-.bento__card::after {
-  padding: 1px;
-  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 80%, transparent), transparent 60%);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
-
-.bento:hover .bento__card::before,
-.bento:hover .bento__card::after {
-  opacity: 1;
-}
-
-.bento__icon {
+.feature__icon {
+  flex-shrink: 0;
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  margin-bottom: 14px;
-  border-radius: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 14%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-  box-shadow: 0 0 32px -6px color-mix(in srgb, var(--accent) 60%, transparent);
+  background: var(--accent-soft);
 }
 
-.bento__title {
-  font-family: var(--font-display);
-  font-size: clamp(20px, 2.4vw, 26px);
+.feature__title {
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: -0.01em;
 }
 
-.bento__text {
-  max-width: 34ch;
-  font-size: 16px;
+.feature__text {
+  margin-top: 2px;
+  font-size: 15px;
   color: var(--text-2);
 }
 
-.bento__watermark {
-  position: absolute;
-  right: -28px;
-  bottom: -34px;
-  z-index: -1;
-  color: var(--accent);
-  opacity: 0.07;
-  stroke-width: 1.2;
-  transform: rotate(-12deg);
-  transition:
-    transform 0.8s var(--ease-out),
-    opacity 0.4s;
-}
-
-.bento__card:hover .bento__watermark {
-  opacity: 0.14;
-  transform: rotate(0deg) scale(1.06);
-}
-
-@media (max-width: 899px) {
-  .bento {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .bento__card--network,
-  .bento__card--experience {
-    grid-column: auto;
-  }
-}
-
-@media (max-width: 599px) {
-  .about__stats {
-    gap: 8px;
-  }
-
-  .about__stat {
-    padding: 16px 14px;
-  }
-
-  .bento {
+@media (max-width: 639px) {
+  .features {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .bento__card {
-    min-height: 0;
+  .feature {
+    padding: 16px;
   }
 }
