@@ -8,10 +8,12 @@ import { Schedule } from "./components/Schedule";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { SiteNav } from "./components/SiteNav";
 import { Ticker } from "./components/Ticker";
+import { usePauseOffscreen } from "./hooks/usePauseOffscreen";
 import { useReveal } from "./hooks/useReveal";
 
 const App = () => {
   useReveal();
+  usePauseOffscreen();
 
   return (
     <>

@@ -21,7 +21,7 @@ const Tape = ({ variant }: { variant: "fill" | "outline" }) => (
 
 /** 엇갈린 두 줄의 흐르는 띠 (장식) */
 export const Ticker = () => (
-  <div className="ticker" aria-hidden="true">
+  <div className="ticker" aria-hidden="true" data-anim>
     <Tape variant="outline" />
     <Tape variant="fill" />
   </div>

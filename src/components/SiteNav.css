@@ -112,6 +112,15 @@
   transition: color 0.25s;
 }
 
+/* 터치 화면: 스크롤할 때마다 뒤를 다시 흐리게 그리는 블러 대신 진한 배경 */
+@media (hover: none), (pointer: coarse) {
+  .site-nav {
+    background: rgba(10, 16, 34, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
 /* 모바일: 화면 아래 탭 바 */
 @media (max-width: 899px) {
   .site-nav {

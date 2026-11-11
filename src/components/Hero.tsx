@@ -22,7 +22,7 @@ export const Hero = () => {
   const dday = ddayLabel(event.date);
 
   return (
-    <header className="hero" id="top">
+    <header className="hero" id="top" data-anim>
       <div className="hero__bg" aria-hidden="true">
         <span className="hero__aurora hero__aurora--1" />
         <span className="hero__aurora hero__aurora--2" />

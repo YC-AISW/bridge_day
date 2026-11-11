@@ -183,7 +183,7 @@ export const Directions = () => {
 
         <div className="directions__layout">
           <div className="directions__map-col">
-            <div className="map-card reveal" ref={mapCardRef}>
+            <div className="map-card reveal" ref={mapCardRef} data-anim>
               <p className="map-card__caption" aria-live="polite">
                 <span className="map-card__num">{active + 1}</span>
                 {routeSteps[active].title}

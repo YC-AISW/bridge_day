@@ -36,6 +36,7 @@ const stopIndexAt = (meters: number) => stops.reduce((index, stop, i) => (meters
  */
 export const CampusMap = forwardRef<CampusMapHandle, Props>(function CampusMap({ active, onActiveChange }, ref) {
   const progressRef = useRef<SVGPathElement>(null);
+  const glowRef = useRef<SVGPathElement>(null);
   const walkerRef = useRef<SVGGElement>(null);
   const current = useRef(0);
   const frame = useRef(0);
@@ -51,8 +52,11 @@ export const CampusMap = forwardRef<CampusMapHandle, Props>(function CampusMap({
     if (!path || !walker) return;
     const total = path.getTotalLength();
     const length = Math.min(total, Math.max(0, (meters / route.length) * total));
-    path.style.strokeDasharray = `${total} ${total}`;
-    path.style.strokeDashoffset = `${total - length}`;
+    for (const line of [path, glowRef.current]) {
+      if (!line) continue;
+      line.style.strokeDasharray = `${total} ${total}`;
+      line.style.strokeDashoffset = `${total - length}`;
+    }
     const point = path.getPointAtLength(length);
     walker.setAttribute("transform", `translate(${point.x.toFixed(2)} ${point.y.toFixed(2)})`);
     current.current = meters;
@@ -168,13 +172,6 @@ export const CampusMap = forwardRef<CampusMapHandle, Props>(function CampusMap({
           <stop offset="0" stopColor="#9b7bff" />
           <stop offset="1" stopColor="#5b8cff" />
         </linearGradient>
-        <filter id="map-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.4" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
       </defs>
 
       <rect x={-PAD} y={-PAD} width={MAP_WIDTH + PAD * 2} height={MAP_HEIGHT + PAD * 2} fill="url(#map-grid)" />
@@ -206,7 +203,9 @@ export const CampusMap = forwardRef<CampusMapHandle, Props>(function CampusMap({
       {/* 경로: 바탕 → 흐르는 점선 → 지나온 길 */}
       <path className="map-route-base" d={route.d} />
       <path className="map-route-flow" d={route.d} />
-      <path ref={progressRef} className="map-route-progress" d={route.d} filter="url(#map-glow)" />
+      {/* 빛 번짐은 블러 필터 대신 굵고 옅은 선으로 (휴대폰에서 훨씬 가벼워요) */}
+      <path ref={glowRef} className="map-route-glow" d={route.d} />
+      <path ref={progressRef} className="map-route-progress" d={route.d} />
 
       {/* 정문 기둥 */}
       <g className="map-gate" transform={`translate(${stops[0].point[0]} ${stops[0].point[1]})`}>

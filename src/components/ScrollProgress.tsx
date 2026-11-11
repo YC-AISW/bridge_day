@@ -10,7 +10,7 @@ export const ScrollProgress = () => {
       frame = 0;
       const root = document.documentElement;
       const max = root.scrollHeight - root.clientHeight;
-      ref.current?.style.setProperty("--p", max > 0 ? (root.scrollTop / max).toFixed(4) : "0");
+      if (ref.current) ref.current.style.transform = `scaleX(${max > 0 ? (root.scrollTop / max).toFixed(4) : 0})`;
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);

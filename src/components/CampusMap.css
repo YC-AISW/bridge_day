@@ -51,7 +51,6 @@
   fill: url(#map-dest);
   stroke: #e9e4ff;
   stroke-width: 1.4;
-  filter: drop-shadow(0 0 8px rgba(155, 123, 255, 0.9));
 }
 
 /* 목적지 퍼지는 원 */
@@ -82,6 +81,7 @@
 /* 경로 */
 .map-route-base,
 .map-route-flow,
+.map-route-glow,
 .map-route-progress {
   fill: none;
   stroke-linecap: round;
@@ -104,6 +104,12 @@
   to {
     stroke-dashoffset: -8.5;
   }
+}
+
+.map-route-glow {
+  stroke: url(#map-route);
+  stroke-width: 14;
+  opacity: 0.28;
 }
 
 .map-route-progress {
@@ -149,7 +155,8 @@
 /* 목적지 말풍선 */
 .map-callout path {
   fill: #fff;
-  filter: drop-shadow(0 4px 10px rgba(155, 123, 255, 0.55));
+  stroke: rgba(155, 123, 255, 0.6);
+  stroke-width: 1;
 }
 
 .map-callout text {
@@ -258,4 +265,22 @@
   fill: none;
   stroke: #9aa6c4;
   stroke-width: 1.2;
+}
+
+/* 터치 화면에서는 반복 애니메이션 없이: 걷는 점은 단계를 바꿀 때만 움직여요 */
+@media (hover: none), (pointer: coarse) {
+  .map-route-flow,
+  .map-dest-ring,
+  .map-walker__halo {
+    animation: none;
+  }
+
+  .map-dest-ring {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+
+  .map-dest-ring--late {
+    display: none;
+  }
 }

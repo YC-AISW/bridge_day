@@ -4,16 +4,18 @@
   --rail-w: 48px;
   --rail-x: calc(var(--time-w) + var(--rail-w) / 2);
   position: relative;
-  display: grid;
-  gap: 14px;
   max-width: 920px;
   margin-inline: auto;
 }
 
-/* 세로선 (바탕 + 스크롤에 따라 채워지는 선) */
-.timeline::before,
-.timeline::after {
-  content: "";
+.timeline__list {
+  display: grid;
+  gap: 14px;
+}
+
+/* 세로선 (바탕 + 스크롤에 따라 채워지는 선, 채우기는 JS 가 transform 으로) */
+.timeline__rail,
+.timeline__fill {
   position: absolute;
   top: 10px;
   bottom: 10px;
@@ -22,15 +24,15 @@
   border-radius: 2px;
 }
 
-.timeline::before {
+.timeline__rail {
   background: var(--line-2);
 }
 
-.timeline::after {
+.timeline__fill {
   background: linear-gradient(to bottom, var(--blue), var(--cyan) 60%, var(--violet));
   box-shadow: 0 0 14px rgba(47, 214, 242, 0.7);
   transform-origin: top;
-  transform: scaleY(var(--fill, 0));
+  transform: scaleY(0);
 }
 
 .slot {
@@ -199,8 +201,13 @@
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: spin-angle 6s linear infinite;
   pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .slot--highlight .slot__card:hover::before {
+    animation: spin-angle 4s linear infinite;
+  }
 }
 
 .slot--highlight .slot__title {
@@ -282,6 +289,9 @@
   .timeline {
     --rail-w: 30px;
     --rail-x: 15px;
+  }
+
+  .timeline__list {
     gap: 22px;
   }
 
