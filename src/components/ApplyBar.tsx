@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { event } from "../data";
-import { formatDate } from "../lib/format";
 
 // 신청서 아이콘 (선 아이콘)
 export const ApplyIcon = ({ size = 20 }: { size?: number }) => (
@@ -11,14 +10,8 @@ export const ApplyIcon = ({ size = 20 }: { size?: number }) => (
   </svg>
 );
 
-const Arrow = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14M13 6l6 6-6 6" />
-  </svg>
-);
-
 /**
- * 화면 아래에 떠 있는 참여 신청 버튼
+ * 오른쪽 아래 구석에 작게 떠 있는 참여 신청 버튼
  * - 첫 화면의 신청 버튼이나 맨 아래 푸터의 신청 버튼이 보이는 동안에는 숨겨요 (같은 버튼이 이미 보이니까).
  */
 export const ApplyBar = () => {
@@ -41,8 +34,6 @@ export const ApplyBar = () => {
     return () => observer.disconnect();
   }, []);
 
-  const date = formatDate(event.date);
-
   return (
     <a
       className={`apply-bar${show ? " is-visible" : ""}`}
@@ -52,18 +43,8 @@ export const ApplyBar = () => {
       aria-hidden={!show}
       tabIndex={show ? 0 : -1}
     >
-      <span className="apply-bar__icon">
-        <ApplyIcon />
-      </span>
-      <span className="apply-bar__text">
-        <strong>BRIDGE DAY 참여 신청하기</strong>
-        <small>
-          {date ? `${date} ${event.startTime}` : event.startTime} · {event.venue}
-        </small>
-      </span>
-      <span className="apply-bar__arrow">
-        <Arrow />
-      </span>
+      <ApplyIcon size={16} />
+      참여 신청
     </a>
   );
 };
