@@ -40,7 +40,10 @@ export const Hero = () => (
 
       {/* 바로가기 */}
       <div className="hero-cta">
-        <a className="hero-cta__primary" href="#directions">
+        <a className="hero-cta__primary" href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+          참여 신청하기
+        </a>
+        <a className="hero-cta__secondary" href="#directions">
           오시는 길
         </a>
         <a className="hero-cta__secondary" href="#schedule">

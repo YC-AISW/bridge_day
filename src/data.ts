@@ -8,11 +8,13 @@
 export const event = {
   year: 2026,
   date: "2026-12-05",
-  startTime: "12:00",
+  startTime: "11:30",
   endTime: "15:30",
   venue: "AI·DX 센터 1층",
   school: "연암공과대학교",
   department: "AI소프트웨어학과",
+  /** 참여 신청 페이지 (Notion) */
+  registrationUrl: "https://prairie-lint-d34.notion.site/43223e729dac4c9d9928bcd7e087a0dc",
 };
 
 // 페이지 상단의 About 섹션에서
@@ -61,9 +63,14 @@ export type TimelineItem = {
 
 export const timeline: TimelineItem[] = [
   {
+    time: "11:30 ~ 12:00",
+    title: "출석체크 (30분)",
+    description: "AI·DX 센터 1층에서 출석 확인 및 조 배정 확인",
+  },
+  {
     time: "12:00 ~ 13:00",
-    title: "출석체크 · 점심식사 & 아이스브레이킹 (1시간)",
-    description: "조 배정 확인 후 조별로 함께 점심을 먹으며 어색함 없애기",
+    title: "점심식사 & 아이스브레이킹 (1시간)",
+    description: "조별로 함께 점심을 먹으며 어색함 없애기",
   },
   {
     time: "13:00 ~ 13:10",
