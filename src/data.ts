@@ -85,7 +85,7 @@ export const timeline: TimelineItem[] = [
   {
     time: "13:40 ~ 14:10",
     title: "선배 포트폴리오 & 조언 (30분)",
-    description: "선배 3명(양희승 · 김준성 · 최국진)의 포트폴리오와 대학생활 노하우",
+    description: "선배 3명의 포트폴리오와 대학생활 노하우",
     type: "highlight",
   },
   {

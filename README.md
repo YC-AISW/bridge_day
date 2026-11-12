@@ -87,7 +87,8 @@ npm run preview
 
 - 브이월드 실제 지도(2D) 위에 정문에서 AI·DX 센터까지 가는 길과 목적지 건물만 표시합니다. 오른쪽 위에서 위성지도와 일반지도를 바꿀 수 있습니다.
 - 지도 라이브러리는 [Leaflet](https://leafletjs.com)이고, "오시는 길" 근처까지 스크롤했을 때만 불러와서 첫 화면 로딩에는 영향이 없습니다.
-- 휴대폰에서는 페이지 스크롤이 지도에 막히지 않도록 한 손가락 끌기를 끄고, 두 손가락 확대·이동만 됩니다.
+- 지도는 정문이 아래, AI·DX 센터가 위로 오도록 90° 돌려서 보여 줍니다 ([leaflet-rotate](https://github.com/Raruto/leaflet-rotate) 0.2.8). 회전 각도는 `src/components/CampusMap.tsx`의 `BEARING`입니다.
+- 한 손가락(마우스)으로 지도를 움직이고, 두 손가락 · +/- 버튼으로 확대합니다. 마우스 휠은 페이지 스크롤에 씁니다.
 - 경로는 OpenStreetMap 캠퍼스 도로 데이터를 따라 그렸고, 위성사진·정문 사진으로 정문 위치를 확인했습니다. 정문에서 연암미래관 앞 갈림길까지가 오르막입니다.
 - 출처: 지도 © 국토교통부 브이월드, 건물 윤곽 국토교통부 도로명주소 건물, 도로 © OpenStreetMap contributors (ODbL)
 
@@ -128,7 +129,7 @@ npm run preview
 - TypeScript
 - Tailwind CSS (기본 스타일 초기화)
 - Framer Motion
-- Leaflet (오시는 길 지도)
+- Leaflet · leaflet-rotate (오시는 길 지도)
 - 글꼴: Pretendard (npm 패키지로 함께 배포)
 
 디자인은 2025 BRIDGE DAY 때 만든 화면을 바탕으로, 2026년 내용 · 오시는 길 지도 · 오른쪽 섹션 바로가기를 더했습니다.

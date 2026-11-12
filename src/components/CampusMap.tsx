@@ -1,5 +1,7 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "../lib/leafletGlobal"; // leaflet-rotate 보다 먼저
+import "leaflet-rotate";
 import { useEffect, useRef } from "react";
 import { destination, destinationOutline, gate, route } from "../campusRoute";
 
@@ -21,6 +23,9 @@ const satelliteLayer = () =>
 const baseLayer = () =>
   KEY ? L.tileLayer(vworld("Base", "png"), TILE) : L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", TILE);
 
+// 지도 회전 각도: 정문(동쪽)이 아래로 오게 시계 방향 90°
+const BEARING = 90;
+
 // 지도 위 글자 표시 (정문 · 목적지)
 const tag = (text: string, kind: "gate" | "dest") =>
   L.divIcon({ className: `map-tag map-tag--${kind}`, html: `<span>${text}</span>`, iconSize: [0, 0], iconAnchor: [0, 0] });
@@ -31,19 +36,22 @@ const CampusMap = () => {
 
   useEffect(() => {
     if (!ref.current) return;
-    // 휴대폰에서는 한 손가락으로 페이지를 스크롤할 수 있게 지도 끌기는 끄고, 두 손가락 확대만 남겨요.
-    const touch = window.matchMedia("(pointer: coarse)").matches;
     const map = L.map(ref.current, {
       attributionControl: false, // 지도 위 "Leaflet | © ..." 상자는 숨기고 출처는 지도 아래에
-      scrollWheelZoom: false,
-      dragging: !touch,
+      scrollWheelZoom: false, // 마우스 휠은 페이지 스크롤에 쓰고, 확대는 +/- 버튼 · 두 손가락으로
+      dragging: true, // 한 손가락(마우스)으로 지도 이동
       minZoom: 15,
       maxZoom: 19,
+      // 정문이 아래, AI·DX 센터가 위로 오게 지도를 돌려요 (정문에서 걸어 들어가는 방향이 위쪽).
+      rotate: true,
+      touchRotate: false,
+      shiftKeyRotate: false,
+      rotateControl: false,
     });
 
     const satellite = satelliteLayer().addTo(map);
     L.control
-      .layers({ 위성지도: satellite, 일반지도: baseLayer() }, undefined, { position: "topright", collapsed: false })
+      .layers({ 위성지도: satellite, 일반지도: baseLayer() }, undefined, { position: "bottomright", collapsed: false })
       .addTo(map);
 
     // 타일 사이 미세한 틈으로 배경이 비쳐도 눈에 띄지 않게, 지도 종류에 맞는 배경색을 깔아요.
@@ -60,11 +68,16 @@ const CampusMap = () => {
     L.marker(destination, { icon: tag("AI·DX 센터 1층", "dest"), interactive: false, keyboard: false }).addTo(map);
     L.marker(gate, { icon: tag("정문", "gate"), interactive: false, keyboard: false }).addTo(map);
 
+    // 위치를 먼저 정한 뒤 돌려요 (위치가 없을 때 돌리면 회전 플러그인이 오류를 내요).
+    const bounds = L.latLngBounds([...route, ...destinationOutline]);
+    map.setView(bounds.getCenter(), 16, { animate: false });
+    map.setBearing(BEARING);
+
     // 경로 전체가 보이게 맞추되, 위쪽은 이름표가 잘리지 않게 여백을 더 둬요.
     // (확대는 정수 단계만 써요: 반 단계 확대는 타일 경계에 가는 선이 보여요)
-    map.fitBounds(L.latLngBounds([...route, ...destinationOutline]), {
-      paddingTopLeft: [20, 56],
-      paddingBottomRight: [30, 24],
+    map.fitBounds(bounds, {
+      paddingTopLeft: [20, 48],
+      paddingBottomRight: [20, 20],
     });
     return () => {
       map.remove();
