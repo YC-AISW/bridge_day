@@ -958,6 +958,24 @@ footer .sub-footer {
   border-top-color: #fff;
 }
 
+/* 오른쪽 바가 내용과 겹치지 않게: 화면 양옆 여백이 바 폭보다 좁아지는 구간에서 내용 좌우에 여백 */
+@media (min-width: 641px) and (max-width: 1360px) {
+  .container {
+    padding: 0 80px;
+  }
+
+  /* 여백이 좁아서 현재 섹션 이름표는 숨기고, 점에 올리거나 누를 때만 보여요 */
+  .side-nav__link.is-active .side-nav__label {
+    opacity: 0;
+  }
+
+  .side-nav__link:hover .side-nav__label,
+  .side-nav__link:focus-visible .side-nav__label {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (max-width: 640px) {
   .hero {
     padding: 80px 0 120px;
