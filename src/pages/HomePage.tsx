@@ -1,4 +1,5 @@
 import { AboutSection } from "../components/AboutSection";
+import { ApplyBar } from "../components/ApplyBar";
 import { ClubsSection } from "../components/ClubsSection";
 import { DirectionsSection } from "../components/DirectionsSection";
 import { Footer } from "../components/Footer";
@@ -24,6 +25,7 @@ export const HomePage = () => {
         <DirectionsSection />
       </main>
       <Footer />
+      <ApplyBar />
     </>
   );
 };

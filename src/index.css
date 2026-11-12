@@ -714,6 +714,9 @@ footer .sub-footer {
 }
 
 .hero-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 28px;
   border-radius: 50px;
   font-weight: 600;
@@ -1024,7 +1027,9 @@ footer .sub-footer {
 
 /* ===== Footer: 참여 신청 링크 ===== */
 .footer-apply {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin: 4px 0 16px;
   padding: 10px 24px;
   border-radius: 50px;
@@ -1036,4 +1041,101 @@ footer .sub-footer {
 
 .footer-apply:hover {
   background: #7dd3fc;
+}
+
+/* ===== 화면 아래 떠 있는 참여 신청 버튼 ===== */
+.apply-bar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 10px 14px 10px 10px;
+  border-radius: 999px;
+  color: #0f172a;
+  background: linear-gradient(100deg, var(--primary-color), var(--secondary-color));
+  box-shadow:
+    0 14px 34px rgba(56, 189, 248, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 140%);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s,
+    box-shadow 0.2s;
+}
+
+.apply-bar.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.apply-bar.is-visible:hover {
+  transform: translate(-50%, -3px);
+  box-shadow:
+    0 18px 40px rgba(56, 189, 248, 0.45),
+    0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.apply-bar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #0284c7;
+  background: #fff;
+}
+
+.apply-bar__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.apply-bar__text strong {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.apply-bar__text small {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.apply-bar__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.85);
+}
+
+/* 휴대폰: 화면 폭에 맞춘 넓은 버튼, 마지막 섹션이 가리지 않게 아래 여백 */
+@media (max-width: 640px) {
+  .apply-bar {
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    width: calc(100% - 32px);
+  }
+
+  .apply-bar__text {
+    flex: 1;
+  }
+
+  #directions {
+    padding-bottom: 120px;
+  }
 }

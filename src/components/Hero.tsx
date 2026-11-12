@@ -1,4 +1,5 @@
 import { event } from "../data";
+import { ApplyIcon } from "./ApplyBar";
 import { formatDate } from "../lib/format";
 
 // 행사 기본 정보를 렌더링할 데이터 배열 (아이콘 + 텍스트)
@@ -41,6 +42,7 @@ export const Hero = () => (
       {/* 바로가기 */}
       <div className="hero-cta">
         <a className="hero-cta__primary" href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+          <ApplyIcon size={18} />
           참여 신청하기
         </a>
         <a className="hero-cta__secondary" href="#directions">

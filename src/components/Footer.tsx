@@ -1,10 +1,12 @@
 import { event } from "../data";
+import { ApplyIcon } from "./ApplyBar";
 
 export const Footer = () => (
   <footer>
     <div className="container">
       <p>{event.year} BRIDGE DAY</p>
       <a className="footer-apply" href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+        <ApplyIcon size={18} />
         참여 신청하기 →
       </a>
       <p className="sub-footer">
